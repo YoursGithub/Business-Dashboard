@@ -58,16 +58,19 @@
             }
     
             .search-box {
-    width: 100%;
+                width: calc(100% - 1.5rem); /* Subtract total margin from width */
+                max-width: 584px;
     display: flex;
     align-items: center;
     background-color: #303134;
     border: 1px solid #5f6368;
     border-radius: 44px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    position: relative;
     padding: 0.5rem 1rem;
     margin-bottom: 1.5rem;
     margin: 10px;
-    min-width: 0; 
             }
 
 input {
