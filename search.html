@@ -58,7 +58,7 @@
             }
     
             .search-box {
-                width: calc(100% - 1.5rem); /* Subtract total margin from width */
+                width: calc(100% - 1.5rem);
                 max-width: 584px;
     display: flex;
     align-items: center;
@@ -199,6 +199,11 @@ input {
             .overlay.show {
                 display: block;
             }
+            @media (max-width: 768px) {
+        #vertical-menu-btn {
+            display: inline-block !important;
+        }
+    }
         </style>
     
 </head>
