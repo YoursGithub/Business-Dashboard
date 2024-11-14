@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.6/simplebar.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -18,210 +23,428 @@
                 box-sizing: border-box;
                 font-family: Arial, sans-serif;
             }
+
+            .poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.vertical-menu {
+            font-family: 'Poppins', sans-serif;
+            background: #2a3042;
+            
+        }
+
+        .color-sidebar {
+            color: #ffffff;
+        }
+
+        .menu-title {
+            
+            letter-spacing: .05em;
+            pointer-events: none;
+            cursor: default;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #6a7187;
+            font-weight: 600;
+        }
+
+        .metismenu {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .text-style {
+            display: block;
+            color: #a6b0cf;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        
+
+        .list-unstyled {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
     
             body {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                color: #fff;
-                overflow-x: hidden;
-            }
-    
-            .color-sidebar {
-                background-color: #2A3042;
-            }
-    
-            .text-style {
-                color: white;
-            }
-    
-            main {
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                margin-top: -5rem;
-            }
-    
-            .logo {
-                font-size: 5rem;
-                margin-bottom: 2rem;
-                color: #fff;
-            }
-    
-            .search-container {
-                width: 100%;
-                max-width: 584px;
-                margin: 0 1rem;
-                position: relative;
-            }
-    
-            .search-box {
-                width: calc(100% - 1.5rem);
-                max-width: 584px;
-    display: flex;
-    align-items: center;
-    background-color: #303134;
-    border: 1px solid #5f6368;
-    border-radius: 44px;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    position: relative;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1.5rem;
-    margin: 10px;
-            }
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-input {
-    flex: 1 1 auto; 
-    min-width: 0;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    padding: 0.5rem 0;
-    background: transparent;
-    color: #e8eaed;
-    margin-right: 1rem; /* Add space between input and filter icons */
-}
-    
-            .search-box:hover {
-                background-color: #303134;
-                border-color: #7e8187;
-            }
-    
-            .search-box:focus-within {
-                background-color: #303134;
-                border-color: #8ab4f8;
-            }
-    
-            .search-icon {
-                color: #9aa0a6;
-                margin-right: 1rem;
-            }
-    
-            
-    
-            input::placeholder {
-                color: #9aa0a6;
-            }
-    
-            .filter-icons {
-                display: flex;
-                gap: 1rem;
-                margin-left: 1rem;
-                position: relative;
-            }
-    
-            .filter-icon {
-                color: #9aa0a6;
-                cursor: pointer;
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
-                border-radius: 4px;
-                transition: background-color 0.3s ease;
-                user-select: none;
-            }
-    
-            .filter-icon:hover {
-                color: #e8eaed;
-                background-color: #404144;
-            }
-    
-            .filter-icon.active {
-                background-color: #404144;
-                color: #e8eaed;
-            }
-    
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                right: 0;
-                top: calc(100% + 8px);
-                background-color: #303134;
-                min-width: 200px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-                border-radius: 8px;
-                z-index: 1000;
-                opacity: 0;
-                transform: translateY(-10px);
-                transition: opacity 0.3s ease, transform 0.3s ease;
-            }
-    
-            .dropdown-content.show {
-                display: block;
-                opacity: 1;
-                transform: translateY(0);
-            }
-    
-            .dropdown-content a {
-                color: #e8eaed;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-                transition: background-color 0.2s ease;
-            }
-    
-            .dropdown-content a:hover {
-                background-color: #404144;
-            }
-    
-            .dropdown-content a:first-child {
-                border-radius: 8px 8px 0 0;
-            }
-    
-            .dropdown-content a:last-child {
-                border-radius: 0 0 8px 8px;
-            }
-    
-            .filter-icon::after {
-                content: '▼';
-                font-size: 0.7em;
-                margin-left: 6px;
-                transition: transform 0.3s ease;
-            }
-    
-            .filter-icon.active::after {
-                transform: rotate(180deg);
-            }
-    
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: transparent;
-                z-index: 999;
-            }
-    
-            .overlay.show {
-                display: block;
-            }
-            @media (max-width: 768px) {
+    body.light-mode {
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    body.dark-mode {
+        background-color: #212529;
+        color: #f8f9fa;
+    }
+
+    .color-sidebar {
+        background-color: #2A3042;
+        z-index: 1000;
+    }
+
+    .text-style {
+        color: white;
+    }
+
+    main {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: -5rem;
+    }
+
+    .logo {
+        font-size: 5rem;
+        margin-bottom: 2rem;
+        transition: color 0.3s;
+    }
+
+    .light-mode .logo {
+        color: #343a40;
+    }
+
+    .dark-mode .logo {
+        color: #f8f9fa;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: 584px;
+        margin: 0 1rem;
+        position: relative;
+    }
+
+    .search-box {
+        width: calc(100% - 1.5rem);
+        max-width: 584px;
+        display: flex;
+        align-items: center;
+        background-color: #303134;
+        border: 1px solid #5f6368;
+        border-radius: 44px;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        position: relative;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1.5rem;
+        margin: 10px;
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    }
+
+    .light-mode .search-box {
+        background-color: #f8f9fa;
+        border-color: #ced4da;
+        color: #343a40;
+    }
+
+    .dark-mode .search-box {
+        background-color: #343a40;
+        border-color: #495057;
+        color: #f8f9fa;
+    }
+
+    input {
+        flex: 1 1 auto;
+        min-width: 0;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        background: transparent;
+        color: inherit;
+        margin-right: 1rem;
+    }
+
+    .search-box:hover {
+        background-color: #404144;
+        border-color: #7e8187;
+    }
+
+    .light-mode .search-box:hover {
+        background-color: #e9ecef;
+        border-color: #ced4da;
+    }
+
+    .dark-mode .search-box:hover {
+        background-color: #495057;
+        border-color: #ced4da;
+    }
+
+    .search-box:focus-within {
+        background-color: #404144;
+        border-color: #8ab4f8;
+    }
+
+    .light-mode .search-box:focus-within {
+        background-color: #e9ecef;
+        border-color: #8ab4f8;
+    }
+
+    .dark-mode .search-box:focus-within {
+        background-color: #495057;
+        border-color: #8ab4f8;
+    }
+
+    .search-icon {
+        color: #9aa0a6;
+        margin-right: 1rem;
+        transition: color 0.3s;
+    }
+
+    .light-mode .search-icon {
+        color: #6c757d;
+    }
+
+    .dark-mode .search-icon {
+        color: #adb5bd;
+    }
+
+    input::placeholder {
+        color: #9aa0a6;
+        transition: color 0.3s;
+    }
+
+    .light-mode input::placeholder {
+        color: #6c757d;
+    }
+
+    .dark-mode input::placeholder {
+        color: #adb5bd;
+    }
+
+    .filter-icons {
+        display: flex;
+        gap: 1rem;
+        margin-left: 1rem;
+        position: relative;
+    }
+
+    .filter-icon {
+        color: #9aa0a6;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s;
+        user-select: none;
+    }
+
+    .light-mode .filter-icon {
+        color: #6c757d;
+    }
+
+    .dark-mode .filter-icon {
+        color: #adb5bd;
+    }
+
+    .filter-icon:hover {
+        color: #e8eaed;
+        background-color: #404144;
+    }
+
+    .light-mode .filter-icon:hover {
+        color: #343a40;
+        background-color: #e9ecef;
+    }
+
+    .dark-mode .filter-icon:hover {
+        color: #f8f9fa;
+        background-color: #495057;
+    }
+
+    .filter-icon.active {
+        background-color: #404144;
+        color: #e8eaed;
+    }
+
+    .light-mode .filter-icon.active {
+        background-color: #e9ecef;
+        color: #343a40;
+    }
+
+    .dark-mode .filter-icon.active {
+        background-color: #495057;
+        color: #f8f9fa;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        background-color: #303134;
+        min-width: 200px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        border-radius: 8px;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s, color 0.3s;
+    }
+
+    .light-mode .dropdown-content {
+        background-color: #f8f9fa;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        color: #343a40;
+    }
+
+    .dark-mode .dropdown-content {
+        background-color: #343a40;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        color: #f8f9fa;
+    }
+
+    .dropdown-content.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .dropdown-content a {
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.2s ease;
+    }
+
+    .light-mode .dropdown-content a {
+        color: #343a40;
+    }
+
+    .dark-mode .dropdown-content a {
+        color: #f8f9fa;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #404144;
+    }
+
+    .light-mode .dropdown-content a:hover {
+        background-color: #e9ecef;
+    }
+
+    .dark-mode .dropdown-content a:hover {
+        background-color: #495057;
+    }
+
+    .dropdown-content a:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .dropdown-content a:last-child {
+        border-radius: 0 0 8px 8px;
+    }
+
+    .filter-icon::after {
+        content: '▼';
+        font-size: 0.7em;
+        margin-left: 6px;
+        transition: transform 0.3s ease;
+    }
+
+    .filter-icon.active::after {
+        transform: rotate(180deg);
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        z-index: 999;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    @media (max-width: 768px) {
         #vertical-menu-btn {
             display: inline-block !important;
         }
     }
-        </style>
+
+    /* Dark mode/light mode toggle button */
+    .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #404144;
+        color: #f8f9fa;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .light-mode .theme-toggle {
+        background-color: #e9ecef;
+        color: #343a40;
+    }
+
+    .dark-mode .theme-toggle {
+        background-color: #495057;
+        color: #f8f9fa;
+    }
+    .navbar-brand-box {
+            background-color: #2a3042;
+            padding: 0 1.5rem;
+            width: 50px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 1000px) {
+            .navbar-brand-box {
+                width: 250px;
+            }
+        }
+
+        
+
+        
+
+</style>
     
 </head>
-<body>
+<body data-sidebar="dark">
+    
  
     <header id="page-topbar">
         <div class="navbar-header">
             <div class="d-flex">
                 <!-- LOGO -->
-                <div class="navbar-brand-box">
-                    <!-- <a href="index.html" class="logo logo-dark">
-                        <span class="logo-sm">
-                            <img src="assets/images/logo.svg" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="assets/images/logo-dark.png" alt="" height="17">
-                        </span>
-                    </a> -->
+                <div class="navbar-brand-box" style="background-color: #2a3042 ;">
+                    <a href="index.html" class="logo logo-dark">
+                        
+                    </a>
 
                     <!-- <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
@@ -594,33 +817,29 @@ input {
                     </div>
                 </div>
 
-                <div class="dropdown d-inline-block">
+                <!-- <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
                         <i class="bx bx-cog bx-spin"></i>
                     </button>
-                </div>
+                </div> -->
 
             </div>
         </div>
     </header>
 
     <div class="vertical-menu color-sidebar">
-
-        <div data-simplebar class="h-100">
-
-            <!--- Sidemenu -->
+        <div data-simplebar class="h-200">
             <div id="sidebar-menu">
-                <!-- Left Menu Start -->
                 <ul class="metismenu list-unstyled" id="side-menu">
                     <li class="menu-title" key="t-menu">Menu</li>
-
                     <li>
-                            <li class="text-style"><a href="index.html" key="t-default" style="color: white;">Dashboard</a></li>
+                        <li><a href="index.html" style="color: white; display: block;
+                            font-size: 14px;
+                            font-weight: 500;
+                            transition: all 0.3s ease;
+                            text-decoration: none;">Dashboard</a></li>
                     </li>
-
                     <li class="menu-title" key="t-apps">Apps</li>
-
-
                     <li>
                         <a href="#">
                             <span key="t-dashboards" class="text-style">Vendor Search</span>
@@ -632,10 +851,8 @@ input {
                             <span key="t-dashboards" class="text-style">Business Operation</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
-            <!-- Sidebar -->
         </div>
     </div>
 
@@ -671,8 +888,10 @@ input {
             </div>
         </div>
     </main>
-
+    
     <div class="overlay"></div>
+    
+    <!-- <button class="theme-toggle">Toggle Theme</button> -->
 
 
     <script>
@@ -725,7 +944,20 @@ input {
             });
         });
     </script>
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
 
+    <!-- apexcharts -->
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- dashboard init -->
+    <script src="assets/js/pages/dashboard.init.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.6/simplebar.min.js"></script>
+    <script src="assets/js/app.js"></script>
     
 </body>
 </html>

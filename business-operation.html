@@ -3,6 +3,9 @@
 <head>
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.6/simplebar.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <script src="assets/js/plugin.js"></script>
     <style>
@@ -15,7 +18,29 @@
         body {
             font-family: system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            background-color: #1a1a1a;
+            background-color: rgb(236, 230, 230);
+        }
+
+        .poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.navbar-brand-box {
+            background-color: #2a3042;
+            padding: 0 1.5rem;
+            width: 50px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 1000px) {
+            .navbar-brand-box {
+                width: 250px;
+            }
         }
 
         .table-wrapper {
@@ -51,6 +76,7 @@
             z-index: 1;
             border: 1px solid #404040;
         }
+        
 
         td {
             padding: 20px 30px;
@@ -275,7 +301,7 @@
             display: block;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 834px) {
         #vertical-menu-btn {
             display: inline-block !important;
         }
@@ -311,7 +337,7 @@
                 style="
                     display: none;
                 ">
-            <i class="fa fa-fw fa-bars"></i>
+                <i class="fa fa-fw fa-bars"></i>
                 </button>
 
                 
@@ -668,33 +694,29 @@
                     </div>
                 </div>
 
-                <div class="dropdown d-inline-block">
+                <!-- <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
                         <i class="bx bx-cog bx-spin"></i>
                     </button>
-                </div>
+                </div> -->
 
             </div>
         </div>
     </header>
 
     <div class="vertical-menu color-sidebar">
-
-        <div data-simplebar class="h-100">
-
-            <!--- Sidemenu -->
+        <div data-simplebar class="h-200">
             <div id="sidebar-menu">
-                <!-- Left Menu Start -->
                 <ul class="metismenu list-unstyled" id="side-menu">
                     <li class="menu-title" key="t-menu">Menu</li>
-
                     <li>
-                            <li class="text-style"><a href="index.html" key="t-default" style="color: white;">Dashboard</a></li>
+                        <li><a href="index.html" style="color: white; display: block;
+                            font-size: 14px;
+                            font-weight: 500;
+                            transition: all 0.3s ease;
+                            text-decoration: none;">Dashboard</a></li>
                     </li>
-
                     <li class="menu-title" key="t-apps">Apps</li>
-
-
                     <li>
                         <a href="search.html">
                             <span key="t-dashboards" class="text-style">Vendor Search</span>
@@ -706,10 +728,8 @@
                             <span key="t-dashboards" class="text-style">Business Operation</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
-            <!-- Sidebar -->
         </div>
     </div>
 
