@@ -44,46 +44,123 @@
         }
 
         .table-wrapper {
-            position: relative;
-            background: #2c2c2c;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 20px;
-        }
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
 
-        .table-scroll {
-            overflow-x: auto;
-            max-height: calc(100vh - 120px);
-        }
+.table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #2c2c2c;
-            color: #ffffff;
-            min-width: 1000px;
-        }
+/* Base table styles */
+table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
 
-        th {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            font-weight: 600;
-            padding: 15px;
-            text-align: left;
-            position: sticky;
-            top: 0;
-            text-align: center;
-            z-index: 1;
-            border: 1px solid #404040;
-        }
-        
+/* Header styles */
+thead th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    white-space: nowrap;
+    min-width: 200px; /* Ensure minimum width for readability */
+}
 
-        td {
-            padding: 20px 30px;
-            border: 1px solid #404040;
-            color: #e0e0e0;
-        }
+/* Cell styles */
+td {
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+    vertical-align: top;
+    min-width: 200px; /* Match header width */
+}
 
+/* Button styles */
+.manage-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    background: #4B93FF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Mobile specific styles */
+@media screen and (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+    
+    .table-wrapper {
+        margin: 0 -10px; /* Negative margin to allow full-width scrolling */
+    }
+    
+    .table-scroll {
+        padding: 0 10px;
+    }
+    
+    /* Increase touch targets on mobile */
+    th, td {
+        padding: 15px;
+        font-size: 16px; /* Larger font size for better readability */
+    }
+    
+    .manage-btn {
+        padding: 12px 16px; /* Larger buttons for touch */
+        font-size: 16px;
+        width: 100%; /* Full width buttons on mobile */
+    }
+}
+
+/* Active states for buttons */
+.manage-btn:active,
+.manage-btn:hover {
+    background: #3672cc;
+}
+
+/* Smooth scrolling behavior */
+.table-scroll {
+    scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+    
+    .table-wrapper {
+        margin: 0 -10px; /* Negative margin to allow full-width scrolling */
+    }
+    
+    .table-scroll {
+        padding: 0 10px;
+    }
+    
+    /* Increase touch targets on mobile */
+    th, td {
+        padding: 15px;
+        font-size: 16px; /* Larger font size for better readability */
+    }
+    
+    .manage-btn {
+        padding: 12px 16px; /* Larger buttons for touch */
+        font-size: 16px;
+        width: 100%; /* Full width buttons on mobile */
+    }
+}
         .manage-btn {
             background-color: #4CAF50;
             color: white;
@@ -174,7 +251,8 @@
         }
 
         .companies-display {
-            background: #1e1e1e;
+            border: #1a1a1a;
+            background: white;
             padding: 10px;
             margin-top: 10px;
             border-radius: 4px;
@@ -301,11 +379,14 @@
             display: block;
         }
 
-        @media (max-width: 834px) {
         #vertical-menu-btn {
-            display: inline-block !important;
-        }
+    display: block;
+}
+@media screen and (min-width: 769px) {
+    #vertical-menu-btn {
+        display: none !important;
     }
+}
     </style>
 </head>
 <body>
@@ -314,14 +395,14 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
-                    <!-- <a href="index.html" class="logo logo-dark">
-                        <span class="logo-sm">
+                    <a href="index.html" class="logo logo-dark">
+                        <!-- <span class="logo-sm">
                             <img src="assets/images/logo.svg" alt="" height="22">
                         </span>
                         <span class="logo-lg">
                             <img src="assets/images/logo-dark.png" alt="" height="17">
-                        </span>
-                    </a> -->
+                        </span> -->
+                    </a>
 
                     <!-- <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
@@ -333,11 +414,9 @@
                     </a> -->
                 </div>
 
-                <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn"
-                style="
-                    display: none;
-                ">
-                <i class="fa fa-fw fa-bars"></i>
+                <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn" 
+                >
+            <i class="fa fa-fw fa-bars"></i>
                 </button>
 
                 
