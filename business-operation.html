@@ -23,7 +23,7 @@
         }
 
         .poppins-regular {
-  font-family: "Poppins", sans-serif;
+        font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -760,7 +760,7 @@ td {
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                             alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
+                        <span class="d-none d-xl-inline-block ms-1" key="t-henry">Hriday Sarma</span>
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
@@ -857,30 +857,35 @@ td {
         </div>
 
         <div id="discussionModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeDiscussionModal()">&times;</span>
-                <h2>Select Companies</h2>
-                <div class="company-selection">
-                    <div class="company-column">
-                        <h3>First Company</h3>
-                        <div class="company-option" onclick="selectCompany1(this, 'Apple Inc.')">Apple Inc.</div>
-                        <div class="company-option" onclick="selectCompany1(this, 'Microsoft')">Microsoft</div>
-                        <div class="company-option" onclick="selectCompany1(this, 'Amazon')">Amazon</div>
-                        <div class="company-option" onclick="selectCompany1(this, 'Google')">Google</div>
-                        <div class="company-option" onclick="selectCompany1(this, 'Meta')">Meta</div>
-                    </div>
-                    <div class="company-column">
-                        <h3>Second Company</h3>
-                        <div class="company-option" onclick="selectCompany2(this, 'Samsung')">Samsung</div>
-                        <div class="company-option" onclick="selectCompany2(this, 'Sony')">Sony</div>
-                        <div class="company-option" onclick="selectCompany2(this, 'LG')">LG</div>
-                        <div class="company-option" onclick="selectCompany2(this, 'Intel')">Intel</div>
-                        <div class="company-option" onclick="selectCompany2(this, 'AMD')">AMD</div>
-                    </div>
-                </div>
-                <button class="add-btn" onclick="addCompanies()">Add</button>
+    <div class="modal-content">
+        <span class="close" onclick="closeDiscussionModal()">&times;</span>
+        <h2>Select Companies</h2>
+        <div class="company-selection">
+            <div class="company-column">
+                <h3>First Company</h3>
+                <div class="company-option" onclick="selectCompany1(this, 'Apple Inc.')">Apple Inc.</div>
+                <div class="company-option" onclick="selectCompany1(this, 'Microsoft')">Microsoft</div>
+                <div class="company-option" onclick="selectCompany1(this, 'Amazon')">Amazon</div>
+                <div class="company-option" onclick="selectCompany1(this, 'Google')">Google</div>
+                <div class="company-option" onclick="selectCompany1(this, 'Meta')">Meta</div>
+            </div>
+            <div class="company-column">
+                <h3>Second Company</h3>
+                <div class="company-option" onclick="selectCompany2(this, 'Samsung')">Samsung</div>
+                <div class="company-option" onclick="selectCompany2(this, 'Sony')">Sony</div>
+                <div class="company-option" onclick="selectCompany2(this, 'LG')">LG</div>
+                <div class="company-option" onclick="selectCompany2(this, 'Intel')">Intel</div>
+                <div class="company-option" onclick="selectCompany2(this, 'AMD')">AMD</div>
             </div>
         </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search companies..." onkeyup="searchCompanies()">
+            <button class="search-btn" onclick="searchCompanies()">Search</button>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+        <button class="add-btn" onclick="addCompanies()">Add</button>
+    </div>
+</div>
 
 
         <div id="mainModal" class="modal">
