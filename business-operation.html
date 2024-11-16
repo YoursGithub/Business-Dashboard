@@ -58,6 +58,7 @@
 
 /* Base table styles */
 table {
+    margin-top: 30px;
     width: max-content;
     min-width: 100%;
     border-collapse: collapse;
@@ -177,29 +178,229 @@ td {
         }
 
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-        }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
-        .modal-content {
-            position: relative;
-            background-color: #2A3042;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            top: 50px;
-            max-width: 800px;
-            color: white;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: -20px;
+}
+
+.close {
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    width: 30px;
+    margin-top: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: black;
+    border: none;
+}
+
+.closes {
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: black;
+    border: none;
+}
+
+
+.search-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.search-input {
+    width: 80%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #128C7E;
+}
+
+.contacts-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 20px 0;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+}
+
+.contact-card:hover {
+    background-color: #f5f5f5;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #128C7E;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.contact-info {
+    flex-grow: 1;
+}
+
+.contact-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.contact-role {
+    color: #666;
+    font-size: 14px;
+}
+
+.selected-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    min-height: 45px;
+    border-bottom: 1px solid #ddd;
+}
+
+.selected-contact {
+    display: flex;
+    align-items: center;
+    background-color: #E8F5E9;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.selected-contact .avatar {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.remove-contact {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #666;
+    padding: 0 5px;
+}
+
+.remove-contact:hover {
+    color: #ff4444;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+}
+
+.save-btn {
+    background-color: #128C7E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+    background-color: #0a7567;
+}
+
+.table-cell {
+    padding: 10px;
+    border: 1px solid #ddd;
+    min-width: 200px;
+}
+
+.selected-names-display {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #128C7E;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 10px;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.edit-btn:hover {
+    background-color: #E8F5E9;
+}
+
+.discussion-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
         .company-selection {
             display: flex;
@@ -276,6 +477,7 @@ td {
 
         .sub-agreement-item {
             border-bottom: 1px solid #404040;
+            color: white;
         }
 
         .sub-agreement-item:last-child {
@@ -357,7 +559,8 @@ td {
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: -40px;
+            margin-right: 20px;
             width: auto;
         }
 
@@ -387,6 +590,116 @@ td {
     #vertical-menu-btn {
         display: none !important;
     }
+}
+
+.add-row-btn {
+    position: fixed;
+    background-color: #128C7E;
+    color: white;
+    border: none;
+    margin-top: -20px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.add-row-btn:hover {
+    background-color: #0a7567;
+}
+
+.sub-agreement-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sub-agreement-item.locked {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: blur(2px);
+}
+
+.sub-agreement-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: black;
+    border-radius: 4px;
+}
+
+/* Add a lock icon for locked items */
+.lock-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    display: none;
+}
+
+.sub-agreement-item.locked .lock-icon {
+    display: inline;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox.checked {
+    background-color: #00ff00;
+    border-color: #00ff00;
+}
+
+.custom-checkbox:hover {
+    opacity: 0.8;
+}
+
+.checkmark {
+    color: white;
+    display: none;
+}
+
+.custom-checkbox.checked .checkmark {
+    display: block;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.sub-agreement-content {
+    padding: 10px;
+    display: none;
+}
+
+.sub-agreement-content.active {
+    display: block;
+}
+
+.arrow.active {
+    transform: rotate(180deg);
 }
     </style>
 </head>
@@ -814,9 +1127,11 @@ td {
     </div>
 
     <div class="main-content">
+        <button class="add-row-btn" onclick="addNewRow()">Add New Row</button>
+
         <div class="table-wrapper">
             <div class="table-scroll">
-                <table>
+                <table id="mainTable">
                     <thead>
                         <tr>
                             <th>Initial Discussion</th>
@@ -833,11 +1148,16 @@ td {
                             <th>Warranty</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         <tr>
-                            <td class="discussion-cell" data-has-companies="false">
-                                <button class="manage-btn" onclick="openDiscussionModal()">Add Discussion</button>
-                                <div class="companies-display" id="companiesDisplay"></div>
+                            <td class="table-cell">
+                                <div id="discussionContainer" class="discussion-container">
+                                    <button id="addDiscussionBtn" class="manage-btn" style="margin-top: 5px;" onclick="openModal()">Add Discussion</button>
+                                    <div id="selectedNamesDisplay" class="selected-names-display" style="display: none">
+                                        <span id="displayedNames"></span>
+                                        <button class="edit-btn" onclick="openModal()">Edit</button>
+                                    </div>
+                                </div>
                             </td>
                             <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
                             <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
@@ -856,46 +1176,43 @@ td {
             </div>
         </div>
 
-        <div id="discussionModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeDiscussionModal()">&times;</span>
-        <h2>Select Companies</h2>
-        <div class="company-selection">
-            <div class="company-column">
-                <h3>First Company</h3>
-                <div class="company-option" onclick="selectCompany1(this, 'Apple Inc.')">Apple Inc.</div>
-                <div class="company-option" onclick="selectCompany1(this, 'Microsoft')">Microsoft</div>
-                <div class="company-option" onclick="selectCompany1(this, 'Amazon')">Amazon</div>
-                <div class="company-option" onclick="selectCompany1(this, 'Google')">Google</div>
-                <div class="company-option" onclick="selectCompany1(this, 'Meta')">Meta</div>
-            </div>
-            <div class="company-column">
-                <h3>Second Company</h3>
-                <div class="company-option" onclick="selectCompany2(this, 'Samsung')">Samsung</div>
-                <div class="company-option" onclick="selectCompany2(this, 'Sony')">Sony</div>
-                <div class="company-option" onclick="selectCompany2(this, 'LG')">LG</div>
-                <div class="company-option" onclick="selectCompany2(this, 'Intel')">Intel</div>
-                <div class="company-option" onclick="selectCompany2(this, 'AMD')">AMD</div>
+        <div id="searchModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Select Contacts</h2>
+                    <div class="modal-footer">
+                        <button class="save-btn" onclick="saveContacts()">Save</button>
+                    </div>
+                    <button class="close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="selected-contacts" id="selectedContacts"></div>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search contacts..." oninput="filterContacts(this.value)">
+                </div>
+                <div class="contacts-container" id="contactsList"></div>
             </div>
         </div>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search companies..." onkeyup="searchCompanies()">
-            <button class="search-btn" onclick="searchCompanies()">Search</button>
-            <div id="searchResults" class="search-results"></div>
-        </div>
-        <button class="add-btn" onclick="addCompanies()">Add</button>
-    </div>
-</div>
 
 
         <div id="mainModal" class="modal">
             <div class="modal-content">
-                <span class="close" onclick="closeMainModal()">&times;</span>
+                <div style="display: flex; justify-content: flex-end;">
+                    <span class="closes" onclick="closeMainModal()">&times;</span>
+                </div>
                 <h2>Manage Sub-Agreements</h2>
                 <div class="sub-agreement-list">
-                    <div class="sub-agreement-item">
+                    <div class="sub-agreement-item" data-index="0">
                         <div class="sub-agreement-header" onclick="toggleContent(0)">
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 0)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
                             <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
@@ -904,58 +1221,96 @@ td {
                             <p>Define the main objectives and scope of the agreement between parties.</p>
                         </div>
                     </div>
-                    
-                    <div class="sub-agreement-item">
+
+                    <div class="sub-agreement-item" data-index="0">
                         <div class="sub-agreement-header" onclick="toggleContent(1)">
-                            <span>2. General Obligations</span>
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 1)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
                         <div class="sub-agreement-content">
-                            <p>Outline the responsibilities and commitments of all involved parties.</p>
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
                         </div>
                     </div>
 
-                    <div class="sub-agreement-item">
+                    <div class="sub-agreement-item" data-index="0">
                         <div class="sub-agreement-header" onclick="toggleContent(2)">
-                            <span>3. Roles of Parties</span>
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 2)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
                         <div class="sub-agreement-content">
-                            <p>Specify the roles and responsibilities of each party in detail.</p>
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
                         </div>
                     </div>
 
-                    <div class="sub-agreement-item">
+                    <div class="sub-agreement-item" data-index="0">
                         <div class="sub-agreement-header" onclick="toggleContent(3)">
-                            <span>4. Confidentiality</span>
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 3)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
                         <div class="sub-agreement-content">
-                            <p>Detail the terms of confidentiality and information handling procedures.</p>
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
                         </div>
                     </div>
 
-                    <div class="sub-agreement-item">
+                    <div class="sub-agreement-item" data-index="0">
                         <div class="sub-agreement-header" onclick="toggleContent(4)">
-                            <span>5. Timing and Duration of Project</span>
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 4)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </div>
                         <div class="sub-agreement-content">
-                            <p>Establish the timeline and duration for project completion and delivery.</p>
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
                         </div>
                     </div>
+
                 </div>
                 <button class="add-terms-btn" onclick="openTermsModal()">Add Terms</button>
             </div>
         </div>
+
 
         <div id="termsModal" class="modal">
             <div class="modal-content">
@@ -981,7 +1336,317 @@ td {
             const contents = document.querySelectorAll('.sub-agreement-content');
             const arrows = document.querySelectorAll('.arrow');
 
-            let selectedCompany1 = '';
+          // Store selected contacts for each row
+const rowContacts = new Map();
+let rowCounter = 0;
+
+const contacts = [
+    { name: 'Alice Johnson', role: 'Product Manager' },
+    { name: 'Bob Smith', role: 'Senior Developer' },
+    { name: 'Carol Williams', role: 'UX Designer' },
+    { name: 'David Brown', role: 'Marketing Director' },
+    { name: 'Emma Davis', role: 'Project Lead' },
+    { name: 'Frank Miller', role: 'Business Analyst' },
+    { name: 'Grace Lee', role: 'Software Engineer' },
+    { name: 'Henry Wilson', role: 'Quality Assurance' },
+    { name: 'Ivy Chen', role: 'Data Scientist' },
+    { name: 'Jack Taylor', role: 'Systems Architect' }
+];
+
+let currentEditingRow = null;
+
+// Initialize the first row when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the first row's contact set
+    rowContacts.set(0, new Set());
+    
+    // Get the original button HTML and selected names display HTML
+    const originalButtonHtml = document.getElementById('addDiscussionBtn')?.outerHTML || '';
+    const originalDisplayHtml = document.getElementById('selectedNamesDisplay')?.outerHTML || '';
+    
+    // Update the first row's HTML to match the structure we use for new rows
+    const firstRowDiscussionCell = document.querySelector('.table-cell');
+    if (firstRowDiscussionCell) {
+        firstRowDiscussionCell.innerHTML = `
+            <div id="discussionContainer-0" class="discussion-container">
+                <button id="addDiscussionBtn-0" class="manage-btn" style="margin-top: 5px;" onclick="openModal(0)">Add Discussion</button>
+                <div id="selectedNamesDisplay-0" class="selected-names-display" style="display: none">
+                    <span id="displayedNames-0"></span>
+                    <button class="edit-btn" onclick="openModal(0)">Edit</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    rowCounter = 1;
+});
+
+function addNewRow() {
+    const tbody = document.getElementById('tableBody');
+    const newRow = document.createElement('tr');
+    
+    rowContacts.set(rowCounter, new Set());
+    
+    const discussionCell = document.createElement('td');
+    discussionCell.className = 'table-cell';
+    discussionCell.innerHTML = `
+        <div id="discussionContainer-${rowCounter}" class="discussion-container">
+            <button id="addDiscussionBtn-${rowCounter}" class="manage-btn" style="margin-top: 5px;" onclick="openModal(${rowCounter})">Add Discussion</button>
+            <div id="selectedNamesDisplay-${rowCounter}" class="selected-names-display" style="display: none">
+                <span id="displayedNames-${rowCounter}"></span>
+                <button class="edit-btn" onclick="openModal(${rowCounter})">Edit</button>
+            </div>
+        </div>
+    `;
+    newRow.appendChild(discussionCell);
+    
+    for (let i = 0; i < 11; i++) {
+        const td = document.createElement('td');
+        td.innerHTML = '<button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button>';
+        newRow.appendChild(td);
+    }
+    
+    tbody.appendChild(newRow);
+    rowCounter++;
+}
+
+function openModal(rowIndex) {
+    currentEditingRow = rowIndex;
+    const modal = document.getElementById('searchModal');
+    modal.style.display = 'block';
+    
+    // Clear and initialize the selected contacts display
+    const selectedContactsDiv = document.getElementById('selectedContacts');
+    selectedContactsDiv.innerHTML = '';
+    
+    // Pre-populate selected contacts if any exist for this row
+    if (rowContacts.has(rowIndex)) {
+        const selectedContacts = rowContacts.get(rowIndex);
+        if (selectedContacts.size > 0) {
+            renderSelectedContacts();
+        }
+    }
+    
+    renderContacts(contacts);
+}
+
+function closeModal() {
+    document.getElementById('searchModal').style.display = 'none';
+    currentEditingRow = null;
+}
+
+function getInitials(name) {
+    return name.split(' ').map(word => word[0]).join('');
+}
+
+function renderContacts(contactsToRender) {
+    const contactsList = document.getElementById('contactsList');
+    contactsList.innerHTML = contactsToRender.map(contact => `
+        <div class="contact-card ${isContactSelected(contact) ? 'selected' : ''}" 
+             onclick="toggleContact('${contact.name}', '${contact.role}')">
+            <div class="avatar">${getInitials(contact.name)}</div>
+            <div class="contact-info">
+                <div class="contact-name">${contact.name}</div>
+                <div class="contact-role">${contact.role}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function isContactSelected(contact) {
+    if (currentEditingRow === null || !rowContacts.has(currentEditingRow)) return false;
+    return Array.from(rowContacts.get(currentEditingRow))
+        .some(c => c.name === contact.name);
+}
+
+function renderSelectedContacts() {
+    const selectedContactsDiv = document.getElementById('selectedContacts');
+    if (currentEditingRow === null || !rowContacts.has(currentEditingRow)) return;
+
+    const selectedContacts = rowContacts.get(currentEditingRow);
+    selectedContactsDiv.innerHTML = Array.from(selectedContacts).map(contact => `
+        <div class="selected-contact">
+            <div class="avatar">${getInitials(contact.name)}</div>
+            ${contact.name}
+            <span class="remove-contact" onclick="removeContact('${contact.name}', '${contact.role}', event)">×</span>
+        </div>
+    `).join('');
+
+    // Show selected contacts in the modal header
+    selectedContactsDiv.style.display = selectedContacts.size > 0 ? 'flex' : 'none';
+}
+
+function toggleContact(name, role) {
+    if (currentEditingRow === null) return;
+    
+    const contact = { name, role };
+    const rowSelectedContacts = rowContacts.get(currentEditingRow) || new Set();
+    
+    if (Array.from(rowSelectedContacts).some(c => c.name === name)) {
+        rowSelectedContacts.delete(Array.from(rowSelectedContacts).find(c => c.name === name));
+    } else {
+        rowSelectedContacts.add(contact);
+    }
+    
+    rowContacts.set(currentEditingRow, rowSelectedContacts);
+    renderSelectedContacts();
+    renderContacts(contacts);
+}
+
+function removeContact(name, role, event) {
+    event.stopPropagation();
+    if (currentEditingRow === null) return;
+    
+    const rowSelectedContacts = rowContacts.get(currentEditingRow);
+    const contact = Array.from(rowSelectedContacts).find(c => c.name === name);
+    if (contact) {
+        rowSelectedContacts.delete(contact);
+        renderSelectedContacts();
+        renderContacts(contacts);
+    }
+}
+
+function filterContacts(searchTerm) {
+    const filtered = contacts.filter(contact => 
+        contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.role.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    renderContacts(filtered);
+}
+
+function saveContacts() {
+    if (currentEditingRow === null) return;
+    
+    const addDiscussionBtn = document.getElementById(`addDiscussionBtn-${currentEditingRow}`);
+    const selectedNamesDisplay = document.getElementById(`selectedNamesDisplay-${currentEditingRow}`);
+    const displayedNames = document.getElementById(`displayedNames-${currentEditingRow}`);
+    
+    const selectedContacts = rowContacts.get(currentEditingRow);
+    const names = Array.from(selectedContacts).map(contact => contact.name);
+
+    if (names.length > 0) {
+        displayedNames.textContent = names.join(' & ');
+        addDiscussionBtn.style.display = 'none';
+        selectedNamesDisplay.style.display = 'block';
+    }
+    closeModal();
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('searchModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+
+const state = {
+    completedItems: new Set(),
+    currentActiveIndex: 0
+};
+
+// Initialize the UI
+document.addEventListener('DOMContentLoaded', function() {
+    // Lock all items except the first one
+    const items = document.querySelectorAll('.sub-agreement-item');
+    items.forEach((item, index) => {
+        if (index > 0) {
+            item.classList.add('locked');
+        }
+    });
+});
+
+function toggleContent(index) {
+    // Only allow toggling if the item is not locked
+    const items = document.querySelectorAll('.sub-agreement-item');
+    const item = items[index];
+    
+    if (!item.classList.contains('locked')) {
+        const content = item.querySelector('.sub-agreement-content');
+        const arrow = item.querySelector('.arrow');
+        
+        content.classList.toggle('active');
+        arrow.classList.toggle('active');
+    }
+}
+
+function toggleCheckbox(event, index) {
+    event.stopPropagation();
+    
+    // Only proceed if this is the current active item
+    if (index === state.currentActiveIndex) {
+        const checkbox = document.querySelectorAll('.custom-checkbox')[index];
+        const items = document.querySelectorAll('.sub-agreement-item');
+        
+        // Toggle checkbox
+        checkbox.classList.toggle('checked');
+        
+        if (checkbox.classList.contains('checked')) {
+            // Add to completed items
+            state.completedItems.add(index);
+            
+            // Unlock next item if available
+            if (index < items.length - 1) {
+                state.currentActiveIndex = index + 1;
+                items[index + 1].classList.remove('locked');
+                
+                // Optional: Add a visual indication that the next item is now available
+                items[index + 1].style.transition = 'all 0.5s ease';
+                setTimeout(() => {
+                    items[index + 1].style.transform = 'translateX(5px)';
+                    setTimeout(() => {
+                        items[index + 1].style.transform = 'translateX(0)';
+                    }, 200);
+                }, 0);
+            }
+        } else {
+            // If unchecking, lock all subsequent items
+            state.completedItems.delete(index);
+            for (let i = index + 1; i < items.length; i++) {
+                items[i].classList.add('locked');
+                const subsequentCheckbox = document.querySelectorAll('.custom-checkbox')[i];
+                subsequentCheckbox.classList.remove('checked');
+                state.completedItems.delete(i);
+                
+                // Close any open content
+                const content = items[i].querySelector('.sub-agreement-content');
+                const arrow = items[i].querySelector('.arrow');
+                content.classList.remove('active');
+                arrow.classList.remove('active');
+            }
+            state.currentActiveIndex = index;
+        }
+    }
+}
+
+// Optional: Add a visual feedback when trying to interact with locked items
+document.querySelectorAll('.sub-agreement-item').forEach((item, index) => {
+    item.addEventListener('click', (event) => {
+        if (item.classList.contains('locked')) {
+            item.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                item.style.animation = '';
+            }, 500);
+        }
+    });
+});
+
+// Add this CSS animation to your stylesheet
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+`;
+document.head.appendChild(style);
+
+function closeMainModal() {
+    document.getElementById('mainModal').style.display = 'none';
+}
+
+        let selectedCompany1 = '';
         let selectedCompany2 = '';
 
         function openDiscussionModal() {
