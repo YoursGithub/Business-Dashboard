@@ -10,34 +10,174 @@
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <script src="assets/js/plugin.js"></script>
     <style>
-        * {
+         * {
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .table-container {
-            padding: 20px;
-            overflow-x: auto;
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            background-color: rgb(236, 230, 230);
         }
 
-        .vertical-menu {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    z-index: 999;
+        .poppins-regular {
+        font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-#page-topbar {
-    position: fixed;
+.navbar-brand-box {
+            background-color: #2a3042;
+            padding: 0 1.5rem;
+            width: 50px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 1000px) {
+            .navbar-brand-box {
+                width: 250px;
+            }
+        }
+
+        .table-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Base table styles */
+table {
+    margin-top: 30px;
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+/* Header styles */
+thead th {
+    position: sticky;
     top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1000;
+    background: #f8f9fa;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    white-space: nowrap;
+    min-width: 200px; /* Ensure minimum width for readability */
 }
 
-modal {
+/* Cell styles */
+td {
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+    vertical-align: top;
+    min-width: 200px; /* Match header width */
+}
+
+/* Button styles */
+.manage-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    background: #4B93FF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Mobile specific styles */
+@media screen and (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+    
+    .table-wrapper {
+        margin: 0 -10px; /* Negative margin to allow full-width scrolling */
+    }
+    
+    .table-scroll {
+        padding: 0 10px;
+    }
+    
+    /* Increase touch targets on mobile */
+    th, td {
+        padding: 15px;
+        font-size: 16px; /* Larger font size for better readability */
+    }
+    
+    .manage-btn {
+        padding: 12px 16px; /* Larger buttons for touch */
+        font-size: 16px;
+        width: 100%; /* Full width buttons on mobile */
+    }
+}
+
+/* Active states for buttons */
+.manage-btn:active,
+.manage-btn:hover {
+    background: #3672cc;
+}
+
+/* Smooth scrolling behavior */
+.table-scroll {
+    scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+    
+    .table-wrapper {
+        margin: 0 -10px; /* Negative margin to allow full-width scrolling */
+    }
+    
+    .table-scroll {
+        padding: 0 10px;
+    }
+    
+    /* Increase touch targets on mobile */
+    th, td {
+        padding: 15px;
+        font-size: 16px; /* Larger font size for better readability */
+    }
+    
+    .manage-btn {
+        padding: 12px 16px; /* Larger buttons for touch */
+        font-size: 16px;
+        width: 100%; /* Full width buttons on mobile */
+    }
+}
+        .manage-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .manage-btn:hover {
+            background-color: #45a049;
+        }
+
+        .modal {
     display: none;
     position: fixed;
     top: 0;
@@ -74,107 +214,7 @@ modal {
     margin-top: -20px;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 800px;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 12px;
-            text-align: left;
-            position: relative;
-        }
-
-        .add-party-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .checkbox-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
-
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            background: #ff4444;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .checkbox.checked {
-            background: #4CAF50;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-        }
-
-        .add-column-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #4CAF50;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-        }
-
-        .modal-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .modal-buttons button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .cancel-btn {
-            background: #ddd;
-        }
-
-        .close {
+.close {
     font-size: 24px;
     cursor: pointer;
     color: #666;
@@ -312,9 +352,24 @@ body {
     margin-top: 20px;
 }
 
+.save-btn {
+    background-color: #128C7E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+    background-color: #0a7567;
+}
+
 .table-cell {
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid #ddd;
     min-width: 200px;
 }
 
@@ -481,6 +536,7 @@ body {
             flex-direction: column;
             gap: 16px;
         }
+
         .terms-form input, .terms-form textarea {
             width: 100%;
             padding: 8px;
@@ -499,10 +555,11 @@ body {
         .save-btn {
             background-color: #28a745;
             color: white;
-            padding: 8px 8px;
+            padding: 8px 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: -40px;
             margin-right: 20px;
             width: auto;
         }
@@ -589,15 +646,41 @@ body {
     display: inline;
 }
 
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
 
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
 
+.custom-checkbox.checked {
+    background-color: #00ff00;
+    border-color: #00ff00;
+}
 
+.custom-checkbox:hover {
+    opacity: 0.8;
+}
 
 .checkmark {
     color: white;
     display: none;
 }
 
+.custom-checkbox.checked .checkmark {
+    display: block;
+}
 
 .arrow {
     width: 20px;
@@ -617,179 +700,6 @@ body {
 
 .arrow.active {
     transform: rotate(180deg);
-}
-.containers {
-    text-align: center;
-}
-
-.manage-btn {
-    display: inline-block;
-    width: 60%;
-    margin-left: 50px;
-    padding: 10px;
-    font-size: 14px;
-    border: none;
-    background: #4B93FF;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-@media (min-width: 1400px) {
-    .manage-btn {
-        margin-left: 70px;
-    }
-}
-
-@media (min-width: 1800px) {
-    .manage-btn {
-        margin-left: 100px;
-    }
-}
-.content-cell {
-    cursor: pointer;
-    padding: 8px;
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.add-content-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 2px;
-}
-
-.add-content-btn:hover {
-    background-color: #45a049;
-}
-
-.modals {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    z-index: 1000;
-}
-
-.modal-contents {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 5px;
-}
-
-.closes {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.closes:hover {
-    color: black;
-}
-
-#contentInput {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-#fullContentDisplay {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    white-space: pre-wrap;
-}
-
-.upload-btn {
-    padding: 8px 15px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.file-preview {
-    padding: 8px 15px;
-    background-color: #e0e0e0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    display: none;
-    margin-top: 5px;
-    text-align: center;
-}
-
-.preview-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-
-.preview-content {
-    position: relative;
-    width: 80%;
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.close-preview {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-}
-
-.preview-image {
-    max-width: 100%;
-    max-height: 70vh;
-    display: block;
-    margin: 0 auto;
-}
-
-.preview-document {
-    width: 100%;
-    height: 70vh;
-    border: none;
-}
-
-.file-icon {
-    width: 40px;
-    height: 40px;
-    margin: 0 auto 10px;
-}
-
-input[type="file"] {
-    display: none;
 }
     </style>
 </head>
@@ -1189,7 +1099,7 @@ input[type="file"] {
 
     <div class="vertical-menu color-sidebar">
         <div data-simplebar class="h-200">
-            <div id="sidebar-menu" style="background-color: #2a3042;">
+            <div id="sidebar-menu">
                 <ul class="metismenu list-unstyled" id="side-menu">
                     <li class="menu-title" key="t-menu">Menu</li>
                     <li>
@@ -1216,369 +1126,212 @@ input[type="file"] {
         </div>
     </div>
 
+    <div class="main-content">
+        <button class="add-row-btn" onclick="addNewRow()">Add New Row</button>
 
-    <!-- ---------------------------------CONTENT----------------------------------------- -->
-
-    <div class="table-container" style="
-    margin-top: 80px; 
-    margin-left: 250px;
-    padding: 20px;
-    width: calc(100% - 250px);
-    position: relative;
-    min-height: calc(100vh - 80px);
-    background-color: #f8f9fa;
-    overflow-x: auto;
-">        <table id="agreementTable">
-            <thead>
-                <tr>
-                    <th style="text-align: center;">Initial Discussion</th>
-                    <th style="text-align: center;">Sub Agreement</th>
-                    <th style="text-align: center;">Product / Service Specification</th>
-                    <th id="dynamic-columns-start"></th>
-                    <th style="text-align: center;">Deal Completed</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="table-cell">
-                        <div id="discussionContainer" class="discussion-container">
-                            <button id="addDiscussionBtn" class="manage-btn" style="margin-top: 5px;" onclick="openModal()">Add Discussion</button>
-                            <div id="selectedNamesDisplay" class="selected-names-display" style="display: none">
-                                <span id="displayedNames"></span>
-                                <button class="edit-btn" onclick="openModal()">Edit</button>
-                            </div>
-                        </div>
-                    </td>
-                    
-                    <td>
-                        <div class="checkbox-container" style="display: flex; flex-direction: column; align-items: center;">
-                            <div style="display: flex; justify-content: center; margin-bottom: 5px; gap: 8px;">
-                                <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-                                <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-                            </div>
-                            <input type="file" id="fileInput" accept="image/*,.pdf,.doc,.docx" onchange="handleFileUpload(this)">
-                            <label for="fileInput" class="upload-btn">Upload File</label>
-                            <div class="file-preview" onclick="showPreview(this)">
-                                <img class="file-icon" src="" alt="File icon">
-                                <div class="file-name"></div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <button id="addDiscussionBtn" class="manage-btn containers" style="margin-top: 5px;" onclick="openModal()">Add Name</button>
-                    </td>
-                    <td>
-                        <button class="add-column-btn manage-btn" style="margin-left: 40px; font-size: 15px; background-color: #0056b3; color: white;" onclick="showAddColumnModal()">Add column</button>
-                    </td>
-                    <td>
-                        <div class="checkbox-container" style="display: flex; justify-content: center; align-items: center;">
-                            <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-                            <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Modal for adding new column -->
-    <div id="columnModal" class="modal">
-        <div class="modal-content">
-            <h2>Add New Column</h2>
-            <input type="text" id="columnName" placeholder="Enter column name">
-            <div class="modal-buttons">
-                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-                <button class="save-btn" onclick="addNewColumn()">Save</button>
+        <div class="table-wrapper">
+            <div class="table-scroll">
+                <table id="mainTable">
+                    <thead>
+                        <tr>
+                            <th>Initial Discussion</th>
+                            <th>Product/Service Specifications</th>
+                            <th>Payment Terms & Conditions</th>
+                            <th>Platform Fees</th>
+                            <th>Regulatory Compliances</th>
+                            <th>Shipping</th>
+                            <th>Customs Clearance</th>
+                            <th>Delivery</th>
+                            <th>Deal Completed</th>
+                            <th>Return Policy</th>
+                            <th>Dispute Resolution</th>
+                            <th>Warranty</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr>
+                            <td class="table-cell">
+                                <div id="discussionContainer" class="discussion-container">
+                                    <button id="addDiscussionBtn" class="manage-btn" style="margin-top: 5px;" onclick="openModal()">Add Discussion</button>
+                                    <div id="selectedNamesDisplay" class="selected-names-display" style="display: none">
+                                        <span id="displayedNames"></span>
+                                        <button class="edit-btn" onclick="openModal()">Edit</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                            <td><button class="manage-btn" onclick="openMainModal()">Manage sub agreements</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
 
-    <div id="searchModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Select Contacts</h2>
-                <div class="modal-footer">
-                    <button class="save-btn" style="margin-top: -40px;" onclick="saveContacts()">Save</button>
+        <div id="searchModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Select Contacts</h2>
+                    <div class="modal-footer">
+                        <button class="save-btn" onclick="saveContacts()">Save</button>
+                    </div>
+                    <button class="close" onclick="closeModal()">&times;</button>
                 </div>
-                <button class="close" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="selected-contacts" id="selectedContacts"></div>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search contacts..." oninput="filterContacts(this.value)">
-            </div>
-            <div class="contacts-container" id="contactsList"></div>
-        </div>
-    </div>
-
-    <!-- Modal for adding parties -->
-    <div id="partyModal" class="modal">
-        <div class="modal-content">
-            <h2>Add Party</h2>
-            <input type="text" id="partyName" placeholder="Enter party name">
-            <div class="modal-buttons">
-                <button class="cancel-btn" onclick="closePartyModal()">Cancel</button>
-                <button class="save-btn" onclick="saveParty()">Save</button>
+                <div class="selected-contacts" id="selectedContacts"></div>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search contacts..." oninput="filterContacts(this.value)">
+                </div>
+                <div class="contacts-container" id="contactsList"></div>
             </div>
         </div>
-    </div>
 
-    <div id="contentModal" class="modals">
-        <div class="modal-contents">
-            <h2>Add Content</h2>
-            <textarea id="contentInput" placeholder="Enter your content here..." rows="4"></textarea>
-            <div class="modal-buttons">
-                <button class="cancel-btn" onclick="closeContentModal()">Cancel</button>
-                <button class="save-btn" onclick="saveContent()">Save</button>
+
+        <div id="mainModal" class="modal">
+            <div class="modal-content">
+                <div style="display: flex; justify-content: flex-end;">
+                    <span class="closes" onclick="closeMainModal()">&times;</span>
+                </div>
+                <h2>Manage Sub-Agreements</h2>
+                <div class="sub-agreement-list">
+                    <div class="sub-agreement-item" data-index="0">
+                        <div class="sub-agreement-header" onclick="toggleContent(0)">
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 0)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="sub-agreement-content">
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-agreement-item" data-index="0">
+                        <div class="sub-agreement-header" onclick="toggleContent(1)">
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 1)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="sub-agreement-content">
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-agreement-item" data-index="0">
+                        <div class="sub-agreement-header" onclick="toggleContent(2)">
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 2)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="sub-agreement-content">
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-agreement-item" data-index="0">
+                        <div class="sub-agreement-header" onclick="toggleContent(3)">
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 3)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="sub-agreement-content">
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-agreement-item" data-index="0">
+                        <div class="sub-agreement-header" onclick="toggleContent(4)">
+                            <div class="checkbox-wrapper" onclick="toggleCheckbox(event, 4)">
+                                <div class="custom-checkbox">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                            </div>
+                            <span>1. Purpose</span>
+                            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="sub-agreement-content">
+                            <p>Define the main objectives and scope of the agreement between parties.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="add-terms-btn" onclick="openTermsModal()">Add Terms</button>
             </div>
         </div>
-    </div>
-    
-    <div id="viewContentModal" class="modal">
-        <div class="modal-content">
-            <span class="closes" onclick="closeViewContentModal()">&times;</span>
-            <h2>Full Content</h2>
-            <div id="fullContentDisplay"></div>
-        </div>
-    </div>
 
-    <div id="previewModal" class="preview-modal">
-        <div class="preview-content">
-            <span class="close-preview" onclick="closePreview()">&times;</span>
-            <img class="preview-image" src="" alt="Preview" style="display: none;">
-            <iframe class="preview-document" src="" style="display: none;"></iframe>
-        </div>
-    </div>
-    
 
-    <script>
-      function toggleCheckbox(element) {
-    element.classList.toggle('checked');
-}
-
-function showAddColumnModal() {
-    const modal = document.getElementById('columnModal');
-    modal.style.display = 'block';
-}
-
-function closeModal() {
-    document.getElementById('columnModal').style.display = 'none';
-    document.getElementById('columnName').value = '';
-}
-
-function addNewColumn() {
-    const name = document.getElementById('columnName').value;
-    if (name.trim() === '') return;
-
-    const table = document.getElementById('agreementTable');
-    const headerRow = table.querySelector('thead tr');
-    const dataRow = table.querySelector('tbody tr');
-    
-    // Create new header with the entered name
-    const newHeader = document.createElement('th');showPreview
-    newHeader.textContent = name;
-    newHeader.style.textAlign = 'center';
-    
-    const newCell = document.createElement('td');
-    newCell.innerHTML = `
-        <div class="checkbox-container" style="display: flex; flex-direction: column; align-items: center;">
-            <div style="display: flex; justify-content: center; gap:10px; margin-bottom: 5px;">
-            <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-            <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-            </div>
-            <input type="file" id="fileInput_${Date.now()}" accept="image/*,.pdf,.doc,.docx" onchange="handleFileUpload(this)">
-            <label for="fileInput_${Date.now()}" class="upload-btn">Upload File</label>
-            <div class="file-preview" onclick="showPreview(this)">
-                <img class="file-icon" src="" alt="File icon">
-                <div class="file-name"></div>
+        <div id="termsModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeTermsModal()">&times;</span>
+                <h2>Add Terms</h2>
+                <div class="terms-form">
+                    <div>
+                        <label for="heading">Heading</label>
+                        <input type="text" id="heading" placeholder="Enter heading">
+                    </div>
+                    <div>
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Enter description"></textarea>
+                    </div>
+                    <button class="save-btn" onclick="closeTermsModal()">Save</button>
+                </div>
             </div>
         </div>
-    `;
 
-    // Insert before the + button column
-    const addButtonColumn = headerRow.querySelector('th:last-child');
-    headerRow.insertBefore(newHeader, addButtonColumn);
-    dataRow.insertBefore(newCell, dataRow.querySelector('td:last-child'));
-
-    closeModal();
-    document.getElementById('columnName').value = '';
-}
-
-function handleFileUpload(input) {
-    const file = input.files[0];
-    if (!file) return;
-
-    const container = input.parentElement;
-    const uploadBtn = container.querySelector('.upload-btn');
-    const preview = container.querySelector('.file-preview');
-    const fileIcon = preview.querySelector('.file-icon');
-    const fileName = preview.querySelector('.file-name');
-
-    // Store file data for preview
-    preview.dataset.fileType = file.type;
-    preview.dataset.fileUrl = URL.createObjectURL(file);
-
-    // Set appropriate icon based on file type
-    if (file.type.startsWith('image/')) {
-        fileIcon.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgcng9IjIiIHJ5PSIyIj48L3JlY3Q+PGNpcmNsZSBjeD0iOC41IiBjeT0iOC41IiByPSIxLjUiPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjIxIDE1IDEzIDIxIDMgMTUiPjwvcG9seWxpbmU+PC9zdmc+';
-    } else {
-        fileIcon.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMyAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWOXoiPjwvcGF0aD48cG9seWxpbmUgcG9pbnRzPSIxMyAyIDEzIDkgMjAgOSI+PC9wb2x5bGluZT48L3N2Zz4=';
-    }
-
-    fileName.textContent = file.name;
-    uploadBtn.style.display = 'none';
-    preview.style.display = 'block';
-}
-
-function showPreview(previewElement) {
-    const modal = document.getElementById('previewModal');
-    const previewImage = modal.querySelector('.preview-image');
-    const previewDocument = modal.querySelector('.preview-document');
-    
-    const fileType = previewElement.dataset.fileType;
-    const fileUrl = previewElement.dataset.fileUrl;
-
-    if (fileType.startsWith('image/')) {
-        previewImage.src = fileUrl;
-        previewImage.style.display = 'block';
-        previewDocument.style.display = 'none';
-    } else {
-        previewDocument.src = fileUrl;
-        previewDocument.style.display = 'block';
-        previewImage.style.display = 'none';
-    }
-
-    modal.style.display = 'block';
-}
-
-function closePreview() {
-    const modal = document.getElementById('previewModal');
-    modal.style.display = 'none';
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('previewModal');
-    if (event.target === modal) {
-        closePreview();
-    }
-}
-
-function closeModal() {
-    document.getElementById('columnModal').style.display = 'none';
-}
-
-let currentCell = null;
-
-// function addNewColumn() {
-//     const name = document.getElementById('columnName').value;
-//     if (name.trim() === '') return;
-
-//     const table = document.getElementById('agreementTable');
-//     const headerRow = table.querySelector('thead tr');
-//     const dataRow = table.querySelector('tbody tr');
-    
-//     // Create new header with the entered name
-//     const newHeader = document.createElement('th');
-//     newHeader.textContent = name;
-//     newHeader.style.textAlign = 'center';
-    
-//     // Create new cell with checkboxes and content button
-//     const newCell = document.createElement('td');
-//     newCell.innerHTML = `
-//         <div style="display: flex; flex-direction: column; align-items: center;">
-//             <div class="checkbox-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 5px;">
-//                 <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-//                 <div class="checkbox" onclick="toggleCheckbox(this)"></div>
-//             </div>
-//             <button class="add-content-btn" onclick="showContentModal(this)">Add Text</button>
-//             <div class="content-cell" onclick="showViewContentModal(this)" style="display: none;"></div>
-//         </div>
-//     `;
-
-//     // Insert before the + button column
-//     const addButtonColumn = headerRow.querySelector('th:last-child');
-//     headerRow.insertBefore(newHeader, addButtonColumn);
-//     dataRow.insertBefore(newCell, dataRow.querySelector('td:last-child'));
-
-//     closeModal();
-//     document.getElementById('columnName').value = '';
-// }
-
-function showContentModal(button) {
-    currentCell = button.parentElement;
-    document.getElementById('contentModal').style.display = 'block';
-    document.getElementById('contentInput').value = '';
-}
-
-function closeContentModal() {
-    document.getElementById('contentModal').style.display = 'none';
-    currentCell = null;
-}
-
-function saveContent() {
-    if (!currentCell) return;
-    
-    const content = document.getElementById('contentInput').value.trim();
-    if (content === '') return;
-
-    const contentCell = currentCell.querySelector('.content-cell');
-    contentCell.textContent = content;
-    contentCell.style.display = 'block';
-    contentCell.setAttribute('data-full-content', content);
-    
-    closeContentModal();
-}
-
-function showViewContentModal(contentCell) {
-    const fullContent = contentCell.getAttribute('data-full-content');
-    document.getElementById('fullContentDisplay').textContent = fullContent;
-    document.getElementById('viewContentModal').style.display = 'block';
-}
-
-function closeViewContentModal() {
-    document.getElementById('viewContentModal').style.display = 'none';
-}
-
-// Close modals when clicking outside
-window.onclick = function(event) {
-    const modals = [
-        document.getElementById('columnModal'),
-        document.getElementById('contentModal'),
-        document.getElementById('viewContentModal')
-    ];
-    
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-}
-
-        function addParty() {
-            document.getElementById('partyModal').style.display = 'flex';
-        }
-
-        function saveParty() {
-            const partyName = document.getElementById('partyName').value;
-            if (partyName.trim() === '') return;
-
-            const table = document.getElementById('agreementTable');
-            const newRow = document.createElement('tr');
-            
-            // Clone the first row's structure
-            const firstRow = table.querySelector('tbody tr');
-            newRow.innerHTML = firstRow.innerHTML;
-            
-            // Update the first cell with party name
-            newRow.firstElementChild.textContent = partyName;
-            
-            table.querySelector('tbody').appendChild(newRow);
-            
-            closePartyModal();
-            document.getElementById('partyName').value = '';
-        }
-
-        const mainModal = document.getElementById('mainModal');
+        <script>
+            const mainModal = document.getElementById('mainModal');
             const termsModal = document.getElementById('termsModal');
             const contents = document.querySelectorAll('.sub-agreement-content');
             const arrows = document.querySelectorAll('.arrow');
@@ -1817,6 +1570,54 @@ function toggleContent(index) {
     }
 }
 
+function toggleCheckbox(event, index) {
+    event.stopPropagation();
+    
+    // Only proceed if this is the current active item
+    if (index === state.currentActiveIndex) {
+        const checkbox = document.querySelectorAll('.custom-checkbox')[index];
+        const items = document.querySelectorAll('.sub-agreement-item');
+        
+        // Toggle checkbox
+        checkbox.classList.toggle('checked');
+        
+        if (checkbox.classList.contains('checked')) {
+            // Add to completed items
+            state.completedItems.add(index);
+            
+            // Unlock next item if available
+            if (index < items.length - 1) {
+                state.currentActiveIndex = index + 1;
+                items[index + 1].classList.remove('locked');
+                
+                // Optional: Add a visual indication that the next item is now available
+                items[index + 1].style.transition = 'all 0.5s ease';
+                setTimeout(() => {
+                    items[index + 1].style.transform = 'translateX(5px)';
+                    setTimeout(() => {
+                        items[index + 1].style.transform = 'translateX(0)';
+                    }, 200);
+                }, 0);
+            }
+        } else {
+            // If unchecking, lock all subsequent items
+            state.completedItems.delete(index);
+            for (let i = index + 1; i < items.length; i++) {
+                items[i].classList.add('locked');
+                const subsequentCheckbox = document.querySelectorAll('.custom-checkbox')[i];
+                subsequentCheckbox.classList.remove('checked');
+                state.completedItems.delete(i);
+                
+                // Close any open content
+                const content = items[i].querySelector('.sub-agreement-content');
+                const arrow = items[i].querySelector('.arrow');
+                content.classList.remove('active');
+                arrow.classList.remove('active');
+            }
+            state.currentActiveIndex = index;
+        }
+    }
+}
 
 // Optional: Add a visual feedback when trying to interact with locked items
 document.querySelectorAll('.sub-agreement-item').forEach((item, index) => {
@@ -1918,19 +1719,7 @@ function closeMainModal() {
                 closeDiscussionModal();
             }
         }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const columnModal = document.getElementById('columnModal');
-            const partyModal = document.getElementById('partyModal');
-            if (event.target === columnModal) {
-                columnModal.style.display = 'none';
-            }
-            if (event.target === partyModal) {
-                partyModal.style.display = 'none';
-            }
-        }
-    </script>
+        </script>
     </div>
 </body>
 </html>
