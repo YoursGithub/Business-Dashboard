@@ -1382,9 +1382,9 @@ overflow-x: auto;
                             </div>
                         </div>
                     </td>
-                    <td id="nameCell">
-                        <button id="addDiscussionBtn" class="manage-btn containers" style="margin-left:10px; margin-top: 25px;" onclick="openModals()">Add Name</button>
-                    </td>
+                    <td id="nameCell">                         
+                        <button id="addDiscussionBtn" class="manage-btn containers" style="margin-left:10px; margin-top: 25px;" onclick="openModals(0)">Add Name</button>                     
+                    </td> 
                     <td>
                         <button class="add-column-btn manage-btn" style="margin-left: 40px; font-size: 15px; background-color: #0056b3; color: white;" onclick="showAddColumnModal()">Add column</button>
                     </td>
@@ -1467,13 +1467,13 @@ overflow-x: auto;
         </div>
     </div>
 
-    <div id="nameModal" class="modal">
-        <div class="modal-content">
-            <span class="close" style="margin-top: 10px;" onclick="closeModals()">&times;</span>
-            <h3>Add Name</h3>
-            <input type="text" id="nameInput" class="name-inputss" placeholder="Enter name">
-            <button onclick="addNames()" style="margin-top: 20px;" class="manage-btn">Submit</button>
-        </div>
+    <div id="nameModal" class="modal">         
+        <div class="modal-content">             
+            <span class="close" style="margin-top: 10px;" onclick="closeModals(0)">&times;</span>             
+            <h3>Add Name</h3>             
+            <input type="text" id="nameInput" class="name-inputss" placeholder="Enter name">             
+            <button onclick="addNames(0)" style="margin-top: 20px;" class="manage-btn">Submit</button>         
+        </div>     
     </div>
     
     <div class="modalw" id="confirmModal">
@@ -1539,25 +1539,38 @@ let activeCheckbox = null;
 const modal = document.getElementById('nameModal');
 const nameCell = document.getElementById('nameCell');
 
-function openModals() {
-    modal.style.display = "block";
-    document.getElementById('nameInput').value = '';
-}
-
-function closeModals() {
-    modal.style.display = "none";
-}
-
-function addNames() {
-    const name = document.getElementById('nameInput').value.trim();
-    if (name) {
-        // Replace button with the entered name
-        nameCell.innerHTML = name;
-        closeModals();
+function openModals(tableIndex) {
+    console.log('Opening modal for table index:', tableIndex);
+    const modal = document.getElementById(`nameModal${tableIndex === 0 ? '' : '-' + tableIndex}`);
+          
+    if (modal) {
+        console.log('Modal found:', modal);
+        modal.style.display = "block";
     } else {
-        alert('Please enter a name');
+        console.error('Modal not found for index:', tableIndex);
+    } 
+}
+
+function closeModals(tableIndex) {
+    const modal = document.getElementById(`nameModal${tableIndex === 0 ? '' : '-' + tableIndex}`);
+    if (modal) {
+        modal.style.display = "none";
     }
 }
+
+function addNames(tableIndex) {
+    const nameInput = document.getElementById(`nameInput${tableIndex === 0 ? '' : '-' + tableIndex}`);
+    const nameCell = document.getElementById(`nameCell${tableIndex === 0 ? '' : '-' + tableIndex}`);
+    const name = nameInput.value.trim();
+          
+    if (name) {
+        nameCell.innerHTML = name;
+        closeModals(tableIndex);
+    } else {
+        alert('Please enter a name');
+    } 
+}
+
 
 // Close modal when clicking outside
 window.onclick = function(event) {
@@ -2039,61 +2052,6 @@ window.onclick = function(event) {
     }
 }
 
-
-const state = {
-    completedItems: new Set(),
-    currentActiveIndex: 0
-};
-
-// Initialize the UI
-document.addEventListener('DOMContentLoaded', function() {
-    // Lock all items except the first one
-    const items = document.querySelectorAll('.sub-agreement-item');
-    items.forEach((item, index) => {
-        if (index > 0) {
-            item.classList.add('locked');
-        }
-    });
-});
-
-function toggleContent(index) {
-    // Only allow toggling if the item is not locked
-    const items = document.querySelectorAll('.sub-agreement-item');
-    const item = items[index];
-    
-    if (!item.classList.contains('locked')) {
-        const content = item.querySelector('.sub-agreement-content');
-        const arrow = item.querySelector('.arrow');
-        
-        content.classList.toggle('active');
-        arrow.classList.toggle('active');
-    }
-}
-
-
-// Optional: Add a visual feedback when trying to interact with locked items
-document.querySelectorAll('.sub-agreement-item').forEach((item, index) => {
-    item.addEventListener('click', (event) => {
-        if (item.classList.contains('locked')) {
-            item.style.animation = 'shake 0.5s ease-in-out';
-            setTimeout(() => {
-                item.style.animation = '';
-            }, 500);
-        }
-    });
-});
-
-// Add this CSS animation to your stylesheet
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
-    }
-`;
-document.head.appendChild(style);
-
 function closeMainModal() {
     document.getElementById('mainModal').style.display = 'none';
 }
@@ -2232,9 +2190,53 @@ function cloneCompleteTable() {
 }
 
 // Function to reinitialize the cloned table with independent functionality
-function reinitializeClonedTable(clonedTableContainer) {
-    globalTableCounter++;
-    const currentTableIndex = globalTableCounter;
+function reinitializeClonedTable(clonedTableContainer) {     
+    globalTableCounter++;     
+    const currentTableIndex = globalTableCounter;     
+    console.log('Cloning table with index:', currentTableIndex);      
+
+    // Clone the existing name modal     
+    const existingNameModal = document.getElementById('nameModal');     
+    const clonedNameModal = existingNameModal.cloneNode(true);          
+
+    // Update modal ID     
+    clonedNameModal.id = `nameModal-${currentTableIndex}`;          
+
+    // Update input ID     
+    const nameInput = clonedNameModal.querySelector('.name-inputss');     
+    nameInput.id = `nameInput-${currentTableIndex}`;          
+
+    // Update buttons     
+    const closeButton = clonedNameModal.querySelector('.close');     
+    closeButton.setAttribute('onclick', `closeModals(${currentTableIndex})`);          
+
+    const submitButton = clonedNameModal.querySelector('.manage-btn');     
+    submitButton.setAttribute('onclick', `addNames(${currentTableIndex})`);      
+
+    // Add the cloned modal to the body     
+    document.body.appendChild(clonedNameModal);      
+
+    // Update the name cell in the cloned table     
+    const nameCell = clonedTableContainer.querySelector('[id^="nameCell"]');     
+    nameCell.id = `nameCell-${currentTableIndex}`;          
+
+    // MODIFICATION: Reset the name cell content when duplicating
+    nameCell.innerHTML = `<button id="addDiscussionBtn-${currentTableIndex}" class="manage-btn containers" style="margin-left:10px; margin-top: 25px;" onclick="openModals(${currentTableIndex})">Add Name</button>`;
+
+    // Update the name button     
+    const nameButton = nameCell.querySelector('button');     
+    nameButton.setAttribute('onclick', `openModals(${currentTableIndex})`);      
+
+    console.log('Cloned modal:', clonedNameModal);     
+    console.log('Cloned name button:', nameButton);   
+
+
+
+
+
+
+
+    
 
     // Create a unique contacts map for this specific table
     const tableSpecificContacts = new Map();
