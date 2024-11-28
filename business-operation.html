@@ -15,6 +15,7 @@
             font-family: Arial, sans-serif;
         }
 
+
         .containers {
             display: flex;
             justify-content: center;
@@ -23,8 +24,33 @@
         }
 
         .table-container {
-            padding: 20px;
-            overflow-x: auto;
+            max-width: 1200px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #e3d5ca;
+            padding: 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 800;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            border: 2px solid #edede9;
+            padding: 16px;
+            max-width: 500px;
+            vertical-align: middle;
         }
 
         .vertical-menu {
@@ -44,7 +70,7 @@
     z-index: 1000;
 }
 
-modal {
+.modal {
     display: none;
     position: fixed;
     top: 0;
@@ -52,16 +78,17 @@ modal {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
 
 .modal-content {
     position: relative;
     background-color: #fff;
-    margin: 5% auto;
+    margin: 50px auto;
     padding: 20px;
     width: 90%;
     max-width: 500px;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -70,15 +97,105 @@ modal {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
 }
 
 .modal-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.save-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-btn:hover {
+    background-color: #218838;
+}
+
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
     font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-    margin-top: -20px;
+    cursor: pointer;
+    color: #666;
+    background: none;
+    border: none;
+    padding: 5px;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.users-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.user-item:hover {
+    background-color: #f8f9fa;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #20B2AA;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.user-role {
+    font-size: 12px;
+    color: #666;
+}
+
+.user-item.selected {
+    background-color: #f0f7ff;
+}
+
+.selected .user-name {
+    color: #0066cc;
 }
 
 body {
@@ -86,21 +203,6 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
-
-table {
-    margin-top: 30px;
-    width: max-content;
-    min-width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-}
-
-        th, td {
-            border: 1px solid black;
-            padding: 12px;
-            text-align: left;
-            position: relative;
-        }
 
         .add-party-btn {
             background: #4CAF50;
@@ -112,24 +214,26 @@ table {
         }
 
         .checkbox-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
 
         .checkbox {
             width: 20px;
             height: 20px;
+            background-color: red;
+            /* border: 2px solid #d1d5db; */
             border-radius: 4px;
-            background: #ff4444;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.2s;
         }
 
         .checkbox.checked {
-            background: #4CAF50;
+            background: #10b981;
+            border-color: #10b981;
         }
+
 
         .modal {
             display: none;
@@ -631,18 +735,110 @@ table {
     text-align: center;
 }
 
+.new-column {
+            padding: 16px;
+        }
+
+        .new-column input {
+            width: 300%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
 .manage-btn {
-    display: inline-block;
-    width: 60%;
-    margin-left: 50px;
-    padding: 10px;
-    font-size: 14px;
-    border: none;
-    background: #4B93FF;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 10px;
+            background: #2563eb;
+            white-space: nowrap;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .manage-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .create-btn {
+            width: 100%;
+            padding: 8px;
+            background: #1f2937;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .create-btn:hover {
+            background: #111827;
+        }
+
+
+        .upload-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .upload-btn:hover {
+            background: #dc2626;
+        }
+
+ .view-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #file-viewer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #000;
+            max-width: 80%;
+            max-height: 80%;
+            display: none;
+            z-index: 1000;
+        }
+        #file-viewer img, #file-viewer iframe {
+            max-width: 100%;
+            max-height: 70vh;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
 
 @media (min-width: 1400px) {
     .manage-btn {
@@ -710,9 +906,10 @@ table {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
+    margin-top: 10px;
     padding: 20px;
     border: 1px solid #888;
-    width: 300px;
+    width: 600px;
     border-radius: 5px;
 }
 
@@ -745,7 +942,8 @@ table {
 
 .upload-btn {
     padding: 8px 15px;
-    background-color: #f0f0f0;
+    white-space: nowrap;
+    background-color: rgb(226, 75, 75);
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
@@ -856,18 +1054,16 @@ table {
             background-color: #ff4444;
             color: white;
         }
-
-        /* Toast notification */
         .toast {
             position: fixed;
-            bottom: 20px;
+            top: 20px;
             right: 20px;
             background-color: #333;
             color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
+            padding: 15px;
+            border-radius: 5px;
             display: none;
-            animation: slideIn 0.3s ease-in-out;
+            z-index: 1100;
         }
 
         @keyframes slideIn {
@@ -889,9 +1085,170 @@ table {
     background-color: #004494;
 }
 
-input[type="file"] {
+.main-content-wrapper {
+            margin-left: 250px; /* Match your sidebar width */
+            padding-top: 80px; /* Match your navbar height */
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            position: relative;
+            transition: margin-left 0.3s;
+        }
+
+        /* Container for the add button and tables */
+        .table-system-container {
+            padding: 20px;
+            width: calc(100% - 40px); /* Account for padding */
+        }
+
+        /* Add table button styling */
+        .add-table-button {
+            position: fixed;
+            left: calc(250px + 40px); /* Sidebar width + some padding */
+            top: 100px; /* Below navbar */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #0056b3;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-table-button:hover {
+            transform: scale(1.1);
+            background: #004494;
+        }
+
+        /* Tables container styling */
+        #tables-container {
+            margin-left: 40px; /* Align with the button */
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        /* Table styling */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .main-content-wrapper {
+                margin-left: 0;
+            }
+
+            .add-table-button {
+                left: 20px;
+            }
+
+            #tables-container {
+                margin-left: 0;
+            }
+        }
+
+
+        .name-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.name-modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 100px auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.name-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.name-modal-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
+
+.name-close-btn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    background: none;
+    border: none;
+    padding: 5px;
+}
+
+.name-input-container {
+    margin-bottom: 20px;
+}
+
+.name-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.name-input:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.name-save-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.name-save-btn:hover {
+    background-color: #1976D2;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
     display: none;
 }
+
+
     </style>
 </head>
 <body>
@@ -1320,1039 +1677,611 @@ input[type="file"] {
 
     <!-- ---------------------------------CONTENT----------------------------------------- -->
 
+    <div class="main-content-wrapper">
+        <!-- Table system container -->
+        <div class="table-system-container">
+            <!-- Add table button -->
+            <button class="add-table-button" onclick="addNewTable()">+</button>
+            
+            <!-- Tables container -->
+            <div id="tables-container"></div>
+        </div>
+    </div>
 
-    <!-- <button id="duplicateTableBtn" class="manage-btn" style="
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    z-index: 1000;
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;">
-    Duplicate Table
-</button> -->
+    <div id="discussionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Select Contacts</h2>
+                <button class="save-btn">Save</button>
+            </div>
+            <button class="close-btn">×</button>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search contacts...">
+            </div>
+            
+            <div class="users-list" id="usersList">
+                <!-- Users will be added here dynamically -->
+            </div>
+        </div>
+    </div>
 
-<div id="table-containers">
+    <div id="nameModal" class="name-modal">
+        <div class="name-modal-content">
+            <div class="name-modal-header">
+                <h2 class="name-modal-title">Add Name</h2>
+                <button class="name-close-btn">&times;</button>
+            </div>
+            
+            <div class="name-input-container">
+                <input type="text" id="nameInput" class="name-input" placeholder="Enter name">
+                <div class="error-message" id="nameError">Please enter a valid name</div>
+            </div>
+            
+            <button class="name-save-btn" id="nameSaveBtn">Save</button>
+        </div>
+    </div>
 
-<div class="table-container" style="
-margin-top: 80px; 
-margin-left: 250px;
-padding: 20px;
-width: calc(100% - 250px);
-position: relative;
-min-height: calc(100vh - 80px);
-background-color: #f8f9fa;
-overflow-x: auto;
-">       <table id="agreementTable">
-            <thead>
-                <tr>
-                    <th style="text-align: center;">Initial Discussion</th>
-                    <th style="text-align: center;">Sub Agreement</th>
-                    <th style="text-align: center;">Product / Service Specification</th>
-                    <th id="dynamic-columns-start"></th>
-                    <th style="text-align: center;">Deal Completed</th>
-                </tr>
-            </thead>
+    <div id="confirmModal" class="modal" style="text-align: center;">
+        <div class="modal-contents" >
+            <span class="close-btn">&times;</span>
+            <h2>Confirm Action</h2>
+            <p>Are you sure you want to confirm?</p>
+
+            <div">
+            <button id="confirmBtn" style="background-color: #04AA6D; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            font-size: 16px;">Confirm</button>
+
+
+            <button id="cancelBtn" style="background-color: red; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            font-size: 16px;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="file-viewer-overlay" class="overlay"></div>
+    <div id="file-viewer">
+        <button onclick="closeFileViewer()">Close</button>
+        <div id="file-viewer-content"></div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let tableCounter = 0;
+
+        function addNewTable() {
+            const tableId = `table-${tableCounter++}`;
+            const container = document.getElementById('tables-container');
+
+            const tableHTML = `
+                <div class="table-container" id="${tableId}">
+        <table>
+           <thead>
+    <tr>
+        <th style="text-align: center; vertical-align: middle;">Initial Discussion</th>
+        <th style="text-align: center; vertical-align: middle;">Sub Agreement</th>
+        <th style="text-align: center; vertical-align: middle;">Product/ Service Specification</th>
+        <th style="text-align: center; vertical-align: middle;">Payment Terms and Conditions</th>
+        <th style="text-align: center; vertical-align: middle;">Platform Fee</th>
+        <th style="text-align: center; vertical-align: middle;">Packaging and Labelling</th>
+        <th style="text-align: center; vertical-align: middle;">Logistics and Insurance</th>
+        <th style="text-align: center; vertical-align: middle;" id="dynamic-columns-${tableId}">New Column</th>
+        <th style="text-align: center; vertical-align: middle;">Deal Completed</th>
+    </tr>
+</thead>
             <tbody>
                 <tr>
-                    <td class="table-cell">
-                        <div id="discussionContainer" class="discussion-container">
-                            <button id="addDiscussionBtn" class="manage-btn" style="margin-top: 5px;" onclick="openModal()">Add Discussion</button>
-                            <div id="selectedNamesDisplay" class="selected-names-display" style="display: none">
-                                <span id="displayedNames"></span>
-                                <button class="edit-btn" onclick="openModal()">Edit</button>
-                            </div>
+                    <td>
+                        <button class="manage-btn" onclick="manageDiscussion('${tableId}')">
+                            <span>+</span>
+                            Add Discussion
+                        </button>
+                    </td>
+                    <td>
+                        <div class="checkbox-container">                           
+                                <div class="checkbox" style="margin-top: 15px;" onclick="handleCheckbox(this, '${tableId}')"></div>
+                                <div class="checkbox" style="margin-top: 15px;" onclick="handleCheckbox(this, '${tableId}')"></div>
+                            <input type="file" id="fileInput-${tableId}" style="display:none" onchange="handleFileUpload(this, '${tableId}')">
+                            <label for="fileInput-${tableId}" class="upload-btn">
+                                Upload File
+                            </label>
+                            <div id="uploaded-files-${tableId}" class="uploaded-files"></div>
                         </div>
+                    </td>
+                    <td>
+                        <button class="manage-btn" onclick="addName('${tableId}')">
+                            <span>+</span>
+                            Add Name
+                        </button>
                     </td>
                     
                     <td>
-                        <div class="checkbox-container" style="display: flex; flex-direction: column; align-items: center;">
-                            <div class="containers" style="display: flex; justify-content: center; margin-bottom: 5px; gap: 8px;">
-                                <div class="checkbox" onclick="handleCheckboxClick(this)"></div>
-                                <div class="checkbox" onclick="handleCheckboxClick(this)"></div>
-                            </div>
-                            <input type="file" id="fileInput" accept="image/*,.pdf,.doc,.docx" onchange="handleFileUpload(this)">
-                            <label for="fileInput" class="upload-btn">Upload File</label>
-                            <div class="file-preview" onclick="showPreview(this)">
-                                <img class="file-icon" src="" alt="File icon">
-                                <div class="file-name"></div>
-                            </div>
-                        </div>
+                         <input type="file" id="fileInput-${tableId}" style="display:none" onchange="handleFileUpload(this, '${tableId}')">
+                            <label for="fileInput-${tableId}" class="upload-btn">
+                                Upload File
+                            </label>
+                            <div id="uploaded-files-${tableId}" class="uploaded-files"></div>
                     </td>
-                    <td id="nameCell">                         
-                        <button id="addDiscussionBtn" class="manage-btn containers" style="margin-left:10px; margin-top: 25px;" onclick="openModals(0)">Add Name</button>                     
-                    </td> 
+
                     <td>
-                        <button class="add-column-btn manage-btn" style="margin-left: 40px; font-size: 15px; background-color: #0056b3; color: white;" onclick="showAddColumnModal()">Add column</button>
+                        <button class="manage-btn" onclick="addName('${tableId}')">
+                            <span>+</span>
+                            Add Fee
+                        </button>
+                    </td>
+
+                    <td>
+                        <button class="manage-btn" onclick="addName('${tableId}')">
+                            <span>+</span>
+                            Add Name
+                        </button>
+                    </td>
+
+                    <td>
+                        <button class="manage-btn" onclick="addName('${tableId}')">
+                            <span>+</span>
+                            Add Name
+                        </button>
                     </td>
                     <td>
-                        <div class="checkbox-container" style="display: flex; justify-content: center; align-items: center;">
-                            <div class="checkbox" onclick="handleCheckboxClick(this)"></div>
-                            <div class="checkbox" onclick="handleCheckboxClick(this)"></div>
+                    <div class="table-cell">
+                         <button class="manage-btn" onclick="addColumn()">Add Column</button>
+                    </div>
+                    </td>
+                    <td>
+                        <div class="checkbox-container">
+                            <div class="checkbox" onclick="handleCheckbox(this, '${tableId}')"></div>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', tableHTML);
+        }
 
-    <!-- Modal for adding new column -->
-    <div id="columnModal" class="modal">
-        <div class="modal-content">
-            <h2 style="font-size: 18px;">Add New Column</h2>
-            <input type="text" id="columnName" placeholder="Enter column name">
-            <div class="modal-buttons">
-                <button class="save-btn" onclick="addNewColumn()">Save</button>
-            </div>
-        </div>
-    </div>
+        function handleFileUpload(input, tableId) {
+            const uploadedFilesContainer = document.getElementById(`uploaded-files-${tableId}`);
+            
+            // Clear previous files
+            uploadedFilesContainer.innerHTML = '';
+            
+            // Process each uploaded file
+            for (let file of input.files) {
+                const fileItem = document.createElement('div');
+                fileItem.classList.add('file-item');
+                
+                // Create a view button for the file
+                const viewBtn = document.createElement('button');
+                viewBtn.textContent = 'View File';
+                viewBtn.classList.add('view-btn');
+                viewBtn.onclick = () => viewFile(file);
+                
+                // Display file name
+                const fileName = document.createElement('span');
+                // fileName.textContent = file.name;
+                
+                fileItem.appendChild(fileName);
+                fileItem.appendChild(viewBtn);
+                
+                uploadedFilesContainer.appendChild(fileItem);
+            }
+        }
 
-    <div id="searchModal" class="modal">
-        <div class="modal-contents" style="margin-top: 20px;">
-            <div class="modal-header">
-                <h2 class="modal-title">Select Contacts</h2>
-                <div class="modal-footer">
-                    <button class="save-btn" style="margin-top: -40px;" onclick="saveContacts()">Save</button>
-                </div>
-                <button class="close" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="selected-contacts" id="selectedContacts"></div>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search contacts..." oninput="filterContacts(this.value)">
-            </div>
-            <div class="contacts-container" id="contactsList"></div>
-        </div>
-    </div>
-
-    <!-- Modal for adding parties -->
-    <div id="partyModal" class="modal">
-        <div class="modal-content">
-            <h2>Add Party</h2>
-            <input type="text" id="partyName" placeholder="Enter party name">
-            <div class="modal-buttons">
-                <button class="cancel-btn" onclick="closePartyModal()">Cancel</button>
-                <button class="save-btn" onclick="saveParty()">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="contentModal" class="modals">submit-btn
-        <div class="modal-contents">
-            <h2>Add Content</h2>
-            <textarea id="contentInput" placeholder="Enter your content here..." rows="4"></textarea>
-            <div class="modal-buttons">
-                <button class="cancel-btn" onclick="closeContentModal()">Cancel</button>
-                <button class="save-btn" onclick="saveContent()">Save</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="viewContentModal" class="modal">
-        <div class="modal-content">
-            <span class="closes" onclick="closeViewContentModal()">&times;</span>
-            <h2>Full Content</h2>
-            <div id="fullContentDisplay"></div>
-        </div>
-    </div>
-
-    <div id="previewModal" class="preview-modal">
-        <div class="preview-content">
-            <span class="close-preview" onclick="closePreview()">&times;</span>
-            <img class="preview-image" src="" alt="Preview" style="display: none;">
-            <iframe class="preview-document" src="" style="display: none;"></iframe>
-        </div>
-    </div>
-
-    <div id="nameModal" class="modal">         
-        <div class="modal-content">             
-            <span class="close" style="margin-top: 10px;" onclick="closeModals(0)">&times;</span>             
-            <h3>Add Name</h3>             
-            <input type="text" id="nameInput" class="name-inputss" placeholder="Enter name">             
-            <button onclick="addNames(0)" style="margin-top: 20px;" class="manage-btn">Submit</button>         
-        </div>     
-    </div>
-    
-    <div class="modalw" id="confirmModal">
-        <div class="modal-content">
-            <h3>Confirmation</h3>
-            <p>Are you sure you want to confirm?</p>
-            <div class="modal-buttons">
-                <button class="confirm" onclick="handleConfirm()">Yes</button>
-                <button class="cancel" onclick="closeModalw()">No</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="toast" id="toast">
-        Not allowed
-    </div>
-
-    <script>
-let activeCheckbox = null;
-        const modalw = document.getElementById('confirmModal');
-        const toast = document.getElementById('toast');
-
-        function handleCheckboxClick(element) {
-            if (element.classList.contains('checked')) {
-                showToast();
-                return;
+        function viewFile(file) {
+            const viewer = document.getElementById('file-viewer');
+            const viewerContent = document.getElementById('file-viewer-content');
+            const overlay = document.getElementById('file-viewer-overlay');
+            
+            // Clear previous content
+            viewerContent.innerHTML = '';
+            
+            // Determine file type and create appropriate viewer
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.onload = () => URL.revokeObjectURL(img.src);
+                viewerContent.appendChild(img);
+            } else if (file.type === 'application/pdf') {
+                const iframe = document.createElement('iframe');
+                iframe.src = URL.createObjectURL(file);
+                iframe.width = '100%';
+                iframe.height = '600px';
+                iframe.onload = () => URL.revokeObjectURL(iframe.src);
+                viewerContent.appendChild(iframe);
+            } else {
+                const msg = document.createElement('p');
+                msg.textContent = 'This file type cannot be previewed.';
+                viewerContent.appendChild(msg);
             }
             
-            activeCheckbox = element;
-            showModal();
+            // Show viewer and overlay
+            viewer.style.display = 'block';
+            overlay.style.display = 'block';
         }
 
-        function showModal() {
-            modalw.style.display = 'block';
+        function closeFileViewer() {
+            const viewer = document.getElementById('file-viewer');
+            const overlay = document.getElementById('file-viewer-overlay');
+            
+            viewer.style.display = 'none';
+            overlay.style.display = 'none';
         }
 
-        function closeModalw() {
-            modalw.style.display = 'none';
-            activeCheckbox = null;
+        // Placeholder functions for other interactions
+        function handleCheckbox(checkbox, tableId) {
+            checkbox.classList.toggle('checked');
         }
 
-        function handleConfirm() {
-            if (activeCheckbox) {
-                activeCheckbox.classList.add('checked');
-                closeModalw();
+        function manageDiscussion(tableId) {
+            alert(`Managing discussion for ${tableId}`);
+        }
+
+        function addName(tableId) {
+            alert(`Adding name for ${tableId}`);
+        }
+
+        function addColumn(tableId) {
+            alert(`Adding column for ${tableId}`);
+        }
+
+        // Add initial table
+        addNewTable();
+
+        let currentCheckbox = null;
+
+        function handleCheckbox(checkbox, tableId) {
+            // If already checked, show toast
+            if (checkbox.classList.contains('checked')) {
+                showToast('Action already confirmed. No further changes allowed.');
+                return;
+            }
+
+            // Store reference to current checkbox
+            currentCheckbox = checkbox;
+
+            // Show custom modal
+            document.getElementById('confirmModal').style.display = 'block';
+        }
+
+        // Modal event listeners
+        document.querySelector('.close-btn').addEventListener('click', closeModal);
+        document.getElementById('cancelBtn').addEventListener('click', closeModal);
+        document.getElementById('confirmBtn').addEventListener('click', confirmAction);
+
+        function closeModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        function confirmAction() {
+            if (currentCheckbox) {
+                currentCheckbox.classList.add('checked');
+                closeModal();
             }
         }
 
-        function showToast() {
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
             toast.style.display = 'block';
+            
+            // Hide toast after 3 seconds
             setTimeout(() => {
                 toast.style.display = 'none';
             }, 3000);
         }
 
+        // Initial table
+        addNewTable();
 
 
 
-
-
-
-
-const modal = document.getElementById('nameModal');
-const nameCell = document.getElementById('nameCell');
-
-function openModals(tableIndex) {
-    console.log('Opening modal for table index:', tableIndex);
-    const modal = document.getElementById(`nameModal${tableIndex === 0 ? '' : '-' + tableIndex}`);
-          
-    if (modal) {
-        console.log('Modal found:', modal);
-        modal.style.display = "block";
-    } else {
-        console.error('Modal not found for index:', tableIndex);
-    } 
-}
-
-function closeModals(tableIndex) {
-    const modal = document.getElementById(`nameModal${tableIndex === 0 ? '' : '-' + tableIndex}`);
-    if (modal) {
-        modal.style.display = "none";
-    }
-}
-
-function addNames(tableIndex) {
-    const nameInput = document.getElementById(`nameInput${tableIndex === 0 ? '' : '-' + tableIndex}`);
-    const nameCell = document.getElementById(`nameCell${tableIndex === 0 ? '' : '-' + tableIndex}`);
-    const name = nameInput.value.trim();
-          
-    if (name) {
-        nameCell.innerHTML = name;
-        closeModals(tableIndex);
-    } else {
-        alert('Please enter a name');
-    } 
-}
-
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    if (event.target == modal) {
-        closeModals();
-    }
-}
-
-// Handle Enter key press
-document.getElementById('nameInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        addNames();
-    }
-});
-
-
-
-
-
-
-      function toggleCheckbox(element) {
-    element.classList.toggle('checked');
-}
-
-function showAddColumnModal() {
-    const modal = document.getElementById('columnModal');
-    modal.style.display = 'block';
-}
-
-function closeModalq() {
-    document.getElementById('columnModal').style.display = 'none';
-    document.getElementById('columnName').value = '';
-}
-
-function addNewColumn() {
-    const name = document.getElementById('columnName').value;
-    if (name.trim() === '') return;
-
-    const table = document.getElementById('agreementTable');
-    const headerRow = table.querySelector('thead tr');
-    const dataRow = table.querySelector('tbody tr');
+        window.addEventListener('scroll', function() {
+            const button = document.querySelector('.add-table-button');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 20) {
+                button.style.top = '20px';
+                button.style.position = 'fixed';
+            } else {
+                button.style.top = '100px';
+                button.style.position = 'fixed';
+            }
+        });
+        function addColumn(tableId) {
+    const nameModal = document.getElementById('nameModal');
+    const nameInput = document.getElementById('nameInput');
+    const nameError = document.getElementById('nameError');
+    const nameSaveBtn = document.getElementById('nameSaveBtn');
+    const closeBtn = document.querySelector('.name-close-btn');
     
-    // Create new header with the entered name
-    const newHeader = document.createElement('th');showPreview
-    newHeader.textContent = name;
-    newHeader.style.textAlign = 'center';
+    // Reset the input and error message
+    nameInput.value = '';
+    nameError.style.display = 'none';
     
-    const newCell = document.createElement('td');
-    newCell.innerHTML = `
-        <div class="checkbox-container" style="display: flex; flex-direction: column; align-items: center;">
-            <div style="display: flex; justify-content: center; gap:10px; margin-bottom: 5px;">
-             <div class="checkbox" onclick="handleCheckboxClick(this)"></div>
-                                <div class="checkbox" onclick="handleCheckboxClick(this)"></div>
-            </div>
-            <input type="file" id="fileInput_${Date.now()}" accept="image/*,.pdf,.doc,.docx" onchange="handleFileUpload(this)">
-            <label for="fileInput_${Date.now()}" class="upload-btn">Upload File</label>
-            <div class="file-preview" onclick="showPreview(this)">
-                <img class="file-icon" src="" alt="File icon">
-                <div class="file-name"></div>
-            </div>
-        </div>
-    `;
-
-    // Insert before the + button column
-    const addButtonColumn = headerRow.querySelector('th:last-child');
-    headerRow.insertBefore(newHeader, addButtonColumn);
-    dataRow.insertBefore(newCell, dataRow.querySelector('td:last-child'));
-
-    closeModalq();
-    document.getElementById('columnName').value = '';
-}
-
-function handleFileUpload(input) {
-    const file = input.files[0];
-    if (!file) return;
-
-    const container = input.parentElement;
-    const uploadBtn = container.querySelector('.upload-btn');
-    const preview = container.querySelector('.file-preview');
-    const fileIcon = preview.querySelector('.file-icon');
-    const fileName = preview.querySelector('.file-name');
-
-    // Store file data for preview
-    preview.dataset.fileType = file.type;
-    preview.dataset.fileUrl = URL.createObjectURL(file);
-
-    // Set appropriate icon based on file type
-    if (file.type.startsWith('image/')) {
-        fileIcon.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjMiIHk9IjMiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgcng9IjIiIHJ5PSIyIj48L3JlY3Q+PGNpcmNsZSBjeD0iOC41IiBjeT0iOC41IiByPSIxLjUiPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjIxIDE1IDEzIDIxIDMgMTUiPjwvcG9seWxpbmU+PC9zdmc+';
-    } else {
-        fileIcon.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMyAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWOXoiPjwvcGF0aD48cG9seWxpbmUgcG9pbnRzPSIxMyAyIDEzIDkgMjAgOSI+PC9wb2x5bGluZT48L3N2Zz4=';
-    }
-
-    fileName.textContent = file.name;
-    uploadBtn.style.display = 'none';
-    preview.style.display = 'block';
-}
-
-function showPreview(previewElement) {
-    const modal = document.getElementById('previewModal');
-    const previewImage = modal.querySelector('.preview-image');
-    const previewDocument = modal.querySelector('.preview-document');
+    // Show the modal
+    nameModal.style.display = 'block';
     
-    const fileType = previewElement.dataset.fileType;
-    const fileUrl = previewElement.dataset.fileUrl;
-
-    if (fileType.startsWith('image/')) {
-        previewImage.src = fileUrl;
-        previewImage.style.display = 'block';
-        previewDocument.style.display = 'none';
-    } else {
-        previewDocument.src = fileUrl;
-        previewDocument.style.display = 'block';
-        previewImage.style.display = 'none';
-    }
-
-    modal.style.display = 'block';
-}
-
-function closePreview() {
-    const modal = document.getElementById('previewModal');
-    modal.style.display = 'none';
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('previewModal');
-    if (event.target === modal) {
-        closePreview();
-    }
-}
-
-function closeModal() {
-    document.getElementById('columnModal').style.display = 'none';
-}
-
-let currentCell = null;
-
-function showContentModal(button) {
-    currentCell = button.parentElement;
-    document.getElementById('contentModal').style.display = 'block';
-    document.getElementById('contentInput').value = '';
-}
-
-function closeContentModal() {
-    document.getElementById('contentModal').style.display = 'none';
-    currentCell = null;
-}
-
-function saveContent() {
-    if (!currentCell) return;
-    
-    const content = document.getElementById('contentInput').value.trim();
-    if (content === '') return;
-
-    const contentCell = currentCell.querySelector('.content-cell');
-    contentCell.textContent = content;
-    contentCell.style.display = 'block';
-    contentCell.setAttribute('data-full-content', content);
-    
-    closeContentModal();
-}
-
-function showViewContentModal(contentCell) {
-    const fullContent = contentCell.getAttribute('data-full-content');
-    document.getElementById('fullContentDisplay').textContent = fullContent;
-    document.getElementById('viewContentModal').style.display = 'block';
-}
-
-function closeViewContentModal() {
-    document.getElementById('viewContentModal').style.display = 'none';
-}
-
-// Close modals when clicking outside
-window.onclick = function(event) {
-    const modals = [
-        document.getElementById('columnModal'),
-        document.getElementById('contentModal'),
-        document.getElementById('viewContentModal')
-    ];
-    
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
+    // Function to handle column addition
+    const handleSave = () => {
+        const name = nameInput.value.trim();
+        
+        if (!name) {
+            nameError.style.display = 'block';
+            return;
         }
+        
+        const table = document.querySelector(`#${tableId} table`);
+        const headerRow = table.querySelector('thead tr');
+        const dataRow = table.querySelector('tbody tr');
+        
+        const newHeader = document.createElement('th');
+        newHeader.textContent = name;
+        
+        const newCell = document.createElement('td');
+        newCell.innerHTML = `
+            <div class="checkbox-container" style="display: flex; flex-direction: column; align-items: center;">
+                <div class="containers" style="display: flex; justify-content: center; margin-bottom: 5px; gap: 8px;">
+                <div class="checkbox" onclick="handleCheckbox(this, '${tableId}')"></div>
+                <div class="checkbox" onclick="handleCheckbox(this, '${tableId}')"></div>
+                </div>
+                <input type="file" id="fileInput-${Date.now()}" style="display:none">
+                <label for="fileInput-${Date.now()}" class="upload-btn">Upload File</label>
+            </div>
+        `;
+
+        const addColumnTh = headerRow.querySelector(`#dynamic-columns-${tableId}`);
+        headerRow.insertBefore(newHeader, addColumnTh);
+        dataRow.insertBefore(newCell, dataRow.querySelector('td:nth-last-child(2)'));
+        
+        // Close the modal
+        nameModal.style.display = 'none';
+        
+        // Remove event listeners
+        nameSaveBtn.removeEventListener('click', handleSave);
+        closeBtn.removeEventListener('click', handleClose);
+        window.removeEventListener('click', handleOutsideClick);
+    };
+    
+    // Function to handle modal closing
+    const handleClose = () => {
+        nameModal.style.display = 'none';
+        
+        // Remove event listeners
+        nameSaveBtn.removeEventListener('click', handleSave);
+        closeBtn.removeEventListener('click', handleClose);
+        window.removeEventListener('click', handleOutsideClick);
+    };
+    
+    // Function to handle clicking outside the modal
+    const handleOutsideClick = (event) => {
+        if (event.target === nameModal) {
+            handleClose();
+        }
+    };
+    
+    // Add event listeners
+    nameSaveBtn.addEventListener('click', handleSave);
+    closeBtn.addEventListener('click', handleClose);
+    window.addEventListener('click', handleOutsideClick);
+    
+    // Handle Enter key press
+    nameInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleSave();
+        }
+    });
+    
+    // Clear error message when typing
+    nameInput.addEventListener('input', () => {
+        nameError.style.display = 'none';
     });
 }
 
-        function addParty() {
-            document.getElementById('partyModal').style.display = 'flex';
-        }
-
-        function saveParty() {
-            const partyName = document.getElementById('partyName').value;
-            if (partyName.trim() === '') return;
-
-            const table = document.getElementById('agreementTable');
-            const newRow = document.createElement('tr');
-            
-            // Clone the first row's structure
-            const firstRow = table.querySelector('tbody tr');
-            newRow.innerHTML = firstRow.innerHTML;
-            
-            // Update the first cell with party name
-            newRow.firstElementChild.textContent = partyName;
-            
-            table.querySelector('tbody').appendChild(newRow);
-            
-            closePartyModal();
-            document.getElementById('partyName').value = '';
-        }
-
-        const mainModal = document.getElementById('mainModal');
-            const termsModal = document.getElementById('termsModal');
-            const contents = document.querySelectorAll('.sub-agreement-content');
-            const arrows = document.querySelectorAll('.arrow');
-
-          // Store selected contacts for each row
-const rowContacts = new Map();
-let rowCounter = 0;
-
-const contacts = [
-    { name: 'Alice Johnson', role: 'Product Manager' },
-    { name: 'Bob Smith', role: 'Senior Developer' },
-    { name: 'Carol Williams', role: 'UX Designer' },
-    { name: 'David Brown', role: 'Marketing Director' },
-    { name: 'Emma Davis', role: 'Project Lead' },
-    { name: 'Frank Miller', role: 'Business Analyst' },
-    { name: 'Grace Lee', role: 'Software Engineer' },
-    { name: 'Henry Wilson', role: 'Quality Assurance' },
-    { name: 'Ivy Chen', role: 'Data Scientist' },
-    { name: 'Jack Taylor', role: 'Systems Architect' }
+        const users = [
+    { id: 1, name: 'Emma Davis', role: 'Project Lead' },
+    { id: 2, name: 'Frank Miller', role: 'Business Analyst' },
+    { id: 3, name: 'Grace Lee', role: 'Software Engineer' },
+    { id: 4, name: 'Henry Wilson', role: 'Quality Assurance' },
+    { id: 5, name: 'Ivy Chen', role: 'Data Scientist' },
+    { id: 6, name: 'Jack Parker', role: 'UX Designer' }
 ];
 
-let currentEditingRow = null;
-
-document.addEventListener('DOMContentLoaded', function() {
-    rowContacts.set(0, new Set());
-    
-    // Get the original button HTML and selected names display HTML
-    const originalButtonHtml = document.getElementById('addDiscussionBtn')?.outerHTML || '';
-    const originalDisplayHtml = document.getElementById('selectedNamesDisplay')?.outerHTML || '';
-    
-    // Update the first row's HTML to match the structure we use for new rows
-    const firstRowDiscussionCell = document.querySelector('.table-cell');
-    if (firstRowDiscussionCell) {
-        firstRowDiscussionCell.innerHTML = `
-            <div id="discussionContainer-0" class="discussion-container">
-                <button id="addDiscussionBtn-0" class="manage-btn" style="margin-top: 5px;" onclick="openModal(0)">Add Discussion</button>
-                <div id="selectedNamesDisplay-0" class="selected-names-display" style="display: none">
-                    <span id="displayedNames-0"></span>
-                    <button class="edit-btn" onclick="openModal(0)">Edit</button>
-                </div>
-            </div>
-        `;
-    }
-    
-    rowCounter = 1;
-});
-
-function addNewRow() {
-    const tbody = document.getElementById('tableBody');
-    const newRow = document.createElement('tr');
-    
-    // Create a unique identifier for this row
-    const rowId = `row-${Date.now()}`;
-    
-    // Create discussion cell with unique identifiers
-    const discussionCell = document.createElement('td');
-    discussionCell.className = 'table-cell';
-    discussionCell.innerHTML = `
-        <div id="discussionContainer-${rowId}" class="discussion-container">
-            <button id="addDiscussionBtn-${rowId}" class="manage-btn" style="margin-top: 5px;" onclick="openModal('${rowId}')">Add Discussion</button>
-            <div id="selectedNamesDisplay-${rowId}" class="selected-names-display" style="display: none">
-                <span id="displayedNames-${rowId}"></span>
-                <button class="edit-btn" onclick="openModal('${rowId}')">Edit</button>
-            </div>
-        </div>
-    `;
-    newRow.appendChild(discussionCell);
-    
-    // Create cells for sub-agreements with unique management buttons
-    for (let i = 0; i < 11; i++) {
-        const td = document.createElement('td');
-        td.innerHTML = `
-            <div class="cell-content">
-                <button class="manage-btn" onclick="openMainModal('${rowId}')">Manage sub agreements</button>
-                <div class="duplicate-row-btn-container">
-                    <button class="duplicate-row-btn" onclick="duplicateRow(this)">Duplicate Row</button>
-                </div>
-            </div>
-        `;
-        newRow.appendChild(td);
-    }
-    
-    // Append the new row
-    tbody.appendChild(newRow);
-    
-    // Update contacts map with a new Set for this unique row
-    rowContacts.set(rowId, new Set());
-}
-
-function duplicateRow(buttonElement) {
-    // Find the parent row
-    const originalRow = buttonElement.closest('tr');
-    const tbody = originalRow.closest('tbody');
-    
-    // Create a new row
-    const newRow = originalRow.cloneNode(true);
-    
-    // Generate new unique IDs for all elements in the new row
-    const newRowId = `row-${Date.now()}`;
-    
-    // Update discussion container IDs
-    const discussionContainer = newRow.querySelector('.discussion-container');
-    discussionContainer.id = `discussionContainer-${newRowId}`;
-    
-    // Update discussion button
-    const addDiscussionBtn = newRow.querySelector('[id^="addDiscussionBtn-"]');
-    addDiscussionBtn.id = `addDiscussionBtn-${newRowId}`;
-    addDiscussionBtn.setAttribute('onclick', `openModal('${newRowId}')`);
-    
-    // Update selected names display
-    const selectedNamesDisplay = newRow.querySelector('[id^="selectedNamesDisplay-"]');
-    selectedNamesDisplay.id = `selectedNamesDisplay-${newRowId}`;
-    
-    // Update displayed names
-    const displayedNames = newRow.querySelector('[id^="displayedNames-"]');
-    displayedNames.id = `displayedNames-${newRowId}`;
-    
-    // Update edit button
-    const editBtn = selectedNamesDisplay.querySelector('.edit-btn');
-    editBtn.setAttribute('onclick', `openModal('${newRowId}')`);
-    
-    // Update sub-agreement manage buttons
-    const manageButtons = newRow.querySelectorAll('.manage-btn');
-    manageButtons.forEach(btn => {
-        btn.setAttribute('onclick', `openMainModal('${newRowId}')`);
-    });
-    
-    // Reset discussion button and names display
-    addDiscussionBtn.style.display = 'block';
-    selectedNamesDisplay.style.display = 'none';
-    displayedNames.textContent = '';
-    
-    // Insert the new row after the original row
-    tbody.insertBefore(newRow, originalRow.nextSibling);
-    
-    // Create a new entry in rowContacts for the new row
-    rowContacts.set(newRowId, new Set());
-}
-
-function openModal(rowId) {
-    currentEditingRow = rowId;
-    const modal = document.getElementById('searchModal');
-    modal.style.display = 'block';
-    
-    // Clear and initialize the selected contacts display
-    const selectedContactsDiv = document.getElementById('selectedContacts');
-    selectedContactsDiv.innerHTML = '';
-    
-    // Pre-populate selected contacts if any exist for this row
-    if (rowContacts.has(rowId)) {
-        const selectedContacts = rowContacts.get(rowId);
-        if (selectedContacts.size > 0) {
-            renderSelectedContacts();
-        }
-    }
-    
-    renderContacts(contacts);
-}
-
-function closeModal() {
-    document.getElementById('searchModal').style.display = 'none';
-    currentEditingRow = null;
-}
+let selectedUsers = new Set();
+let currentTableId = null;
 
 function getInitials(name) {
-    return name.split(' ').map(word => word[0]).join('');
+    return name.split(' ').map(n => n[0]).join('');
 }
 
-function renderContacts(contactsToRender) {
-    const contactsList = document.getElementById('contactsList');
-    contactsList.innerHTML = contactsToRender.map(contact => `
-        <div class="contact-card ${isContactSelected(contact) ? 'selected' : ''}" 
-             onclick="toggleContact('${contact.name}', '${contact.role}')">
-            <div class="avatar">${getInitials(contact.name)}</div>
-            <div class="contact-info">
-                <div class="contact-name">${contact.name}</div>
-                <div class="contact-role">${contact.role}</div>
-            </div>
-        </div>
-    `).join('');
+function getRandomColor() {
+    const colors = ['#20B2AA', '#4682B4', '#6A5ACD', '#008080', '#2E8B57', '#4169E1'];
+    return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function isContactSelected(contact) {
-    if (currentEditingRow === null || !rowContacts.has(currentEditingRow)) return false;
-    return Array.from(rowContacts.get(currentEditingRow))
-        .some(c => c.name === contact.name);
-}
-
-function renderSelectedContacts() {
-    const selectedContactsDiv = document.getElementById('selectedContacts');
-    if (currentEditingRow === null || !rowContacts.has(currentEditingRow)) return;
-
-    const selectedContacts = rowContacts.get(currentEditingRow);
-    selectedContactsDiv.innerHTML = Array.from(selectedContacts).map(contact => `
-        <div class="selected-contact">
-            <div class="avatar">${getInitials(contact.name)}</div>
-            ${contact.name}
-            <span class="remove-contact" onclick="removeContact('${contact.name}', '${contact.role}', event)">×</span>
-        </div>
-    `).join('');
-
-    // Show selected contacts in the modal header
-    selectedContactsDiv.style.display = selectedContacts.size > 0 ? 'flex' : 'none';
-}
-
-function toggleContact(name, role) {
-    if (currentEditingRow === null) return;
+function renderUsers(usersToRender) {
+    const usersList = document.getElementById('usersList');
+    usersList.innerHTML = '';
     
-    const contact = { name, role };
-    const rowSelectedContacts = rowContacts.get(currentEditingRow) || new Set();
-    
-    if (Array.from(rowSelectedContacts).some(c => c.name === name)) {
-        rowSelectedContacts.delete(Array.from(rowSelectedContacts).find(c => c.name === name));
-    } else {
-        rowSelectedContacts.add(contact);
-    }
-    
-    rowContacts.set(currentEditingRow, rowSelectedContacts);
-    renderSelectedContacts();
-    renderContacts(contacts);
-}
-
-function removeContact(name, role, event) {
-    event.stopPropagation();
-    if (currentEditingRow === null) return;
-    
-    const rowSelectedContacts = rowContacts.get(currentEditingRow);
-    const contact = Array.from(rowSelectedContacts).find(c => c.name === name);
-    if (contact) {
-        rowSelectedContacts.delete(contact);
-        renderSelectedContacts();
-        renderContacts(contacts);
-    }
-}
-
-function filterContacts(searchTerm) {
-    const filtered = contacts.filter(contact => 
-        contact.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.role.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    renderContacts(filtered);
-}
-
-function saveContacts() {
-    if (currentEditingRow === null) return;
-    
-    const addDiscussionBtn = document.getElementById(`addDiscussionBtn-${currentEditingRow}`);
-    const selectedNamesDisplay = document.getElementById(`selectedNamesDisplay-${currentEditingRow}`);
-    const displayedNames = document.getElementById(`displayedNames-${currentEditingRow}`);
-    
-    const selectedContacts = rowContacts.get(currentEditingRow);
-    const names = Array.from(selectedContacts).map(contact => contact.name);
-
-    if (names.length > 0) {
-        displayedNames.textContent = names.join(' & ');
-        addDiscussionBtn.style.display = 'none';
-        selectedNamesDisplay.style.display = 'block';
-    }
-    closeModal();
-}
-
-window.onclick = function(event) {
-    const modal = document.getElementById('searchModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-}
-
-function closeMainModal() {
-    document.getElementById('mainModal').style.display = 'none';
-}
-
-        let selectedCompany1 = '';
-        let selectedCompany2 = '';
-
-        function openDiscussionModal() {
-            document.getElementById('discussionModal').style.display = 'block';
-        }
-
-        function closeDiscussionModal() {
-            document.getElementById('discussionModal').style.display = 'none';
-        }
-
-        function selectCompany1(element, companyName) {
-            document.querySelectorAll('.company-column:first-child .company-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            selectedCompany1 = companyName;
-        }
-
-        function selectCompany2(element, companyName) {
-            document.querySelectorAll('.company-column:last-child .company-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            element.classList.add('selected');
-            selectedCompany2 = companyName;
-        }
-
-        function addCompanies() {
-            if (selectedCompany1 && selectedCompany2) {
-                const displayDiv = document.getElementById('companiesDisplay');
-                const discussionCell = displayDiv.closest('.discussion-cell');
-                discussionCell.setAttribute('data-has-companies', 'true');
-                displayDiv.innerHTML = `Company 1: ${selectedCompany1} & Company 2: ${selectedCompany2}`;
-                closeDiscussionModal();
-            }
-        }
-
-        function toggleContent(index) {
-                contents[index].classList.toggle('active');
-                arrows[index].classList.toggle('active');
-            }
-
-            function openMainModal() {
-                mainModal.style.display = 'block';
-            }
-
-            function closeMainModal() {
-                mainModal.style.display = 'none';
-            }
-
-            function openTermsModal() {
-                termsModal.style.display = 'block';
-            }
-
-            function closeTermsModal() {
-                termsModal.style.display = 'none';
-            }
-
-
-            window.onclick = function(event) {
-                if (event.target == mainModal) {
-                    closeMainModal();
-                }
-                if (event.target == termsModal) {
-                    closeTermsModal();
-                }
-            }
-            
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('discussionModal')) {
-                closeDiscussionModal();
-            }
-        }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const columnModal = document.getElementById('columnModal');
-            const partyModal = document.getElementById('partyModal');
-            if (event.target === columnModal) {
-                columnModal.style.display = 'none';
-            }
-            if (event.target === partyModal) {
-                partyModal.style.display = 'none';
-            }
-        }
-
-
-// --------------------
-
-// Global variable to track table counter
-let globalTableCounter = 1;
-
-// Function to create a unique ID for cloned elements
-function generateUniqueId(prefix) {
-    return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-}
-
-// Create "Add Table" button
-function createAddTableButton() {
-    const button = document.createElement('button');
-    button.textContent = 'Add Table';
-    button.style.position = 'fixed';
-    button.style.left = '270px';
-    button.style.top = '80px';
-    button.style.zIndex = '1000';
-    button.style.padding = '10px';
-    button.style.backgroundColor = '#007bff';
-    button.style.color = 'white';
-    button.style.border = 'none';
-    button.style.borderRadius = '5px';
-    button.style.cursor = 'pointer';
-    button.addEventListener('click', () => cloneCompleteTable());
-    document.body.appendChild(button);
-}
-
-// Function to deep clone table with fully independent functionality
-function cloneCompleteTable() {
-    // Clone the entire table-container
-    const existingTableContainer = document.querySelector('.table-container');
-    const clonedTableContainer = existingTableContainer.cloneNode(true);
-
-    // Create a new wrapper with margin to separate tables
-    const wrapper = document.createElement('div');
-    wrapper.style.marginTop = '-350px';
-    wrapper.appendChild(clonedTableContainer);
-
-    // Insert the new table after the existing tables
-    existingTableContainer.parentNode.appendChild(wrapper);
-
-    // Modify IDs and reinitialize the cloned table with independent functionality
-    reinitializeClonedTable(clonedTableContainer);
-}
-
-// Function to reinitialize the cloned table with independent functionality
-function reinitializeClonedTable(clonedTableContainer) {     
-    globalTableCounter++;     
-    const currentTableIndex = globalTableCounter;     
-    console.log('Cloning table with index:', currentTableIndex);      
-
-    // Clone the existing name modal     
-    const existingNameModal = document.getElementById('nameModal');     
-    const clonedNameModal = existingNameModal.cloneNode(true);          
-
-    // Update modal ID     
-    clonedNameModal.id = `nameModal-${currentTableIndex}`;          
-
-    // Update input ID     
-    const nameInput = clonedNameModal.querySelector('.name-inputss');     
-    nameInput.id = `nameInput-${currentTableIndex}`;          
-
-    // Update buttons     
-    const closeButton = clonedNameModal.querySelector('.close');     
-    closeButton.setAttribute('onclick', `closeModals(${currentTableIndex})`);          
-
-    const submitButton = clonedNameModal.querySelector('.manage-btn');     
-    submitButton.setAttribute('onclick', `addNames(${currentTableIndex})`);      
-
-    // Add the cloned modal to the body     
-    document.body.appendChild(clonedNameModal);      
-
-    // Update the name cell in the cloned table     
-    const nameCell = clonedTableContainer.querySelector('[id^="nameCell"]');     
-    nameCell.id = `nameCell-${currentTableIndex}`;          
-
-    // MODIFICATION: Reset the name cell content when duplicating
-    nameCell.innerHTML = `<button id="addDiscussionBtn-${currentTableIndex}" class="manage-btn containers" style="margin-left:10px; margin-top: 25px;" onclick="openModals(${currentTableIndex})">Add Name</button>`;
-
-    // Update the name button     
-    const nameButton = nameCell.querySelector('button');     
-    nameButton.setAttribute('onclick', `openModals(${currentTableIndex})`);      
-
-    console.log('Cloned modal:', clonedNameModal);     
-    console.log('Cloned name button:', nameButton);   
-
-
-
-
-
-
-
-    
-
-    // Create a unique contacts map for this specific table
-    const tableSpecificContacts = new Map();
-    tableSpecificContacts.set(0, new Set());
-
-    // Update table and element IDs
-    const table = clonedTableContainer.querySelector('table');
-    table.id = `agreementTable-${currentTableIndex}`;
-
-    // Reinitialize discussion container
-    const discussionContainer = clonedTableContainer.querySelector('.discussion-container');
-    discussionContainer.id = `discussionContainer-${currentTableIndex}`;
-
-    // Update Add Discussion button
-    const addDiscussionBtn = discussionContainer.querySelector('.manage-btn');
-    addDiscussionBtn.id = `addDiscussionBtn-${currentTableIndex}`;
-    
-    // Create a closure to capture the specific table's context
-    addDiscussionBtn.setAttribute('onclick', `openTableSpecificModal(${currentTableIndex})`);
-
-    // Update selected names display
-    const selectedNamesDisplay = discussionContainer.querySelector('.selected-names-display');
-    selectedNamesDisplay.id = `selectedNamesDisplay-${currentTableIndex}`;
-    
-    const displayedNames = selectedNamesDisplay.querySelector('span');
-    displayedNames.id = `displayedNames-${currentTableIndex}`;
-
-    // Unique file input handling
-    const fileInputs = clonedTableContainer.querySelectorAll('input[type="file"]');
-    fileInputs.forEach((input, index) => {
-        const uniqueId = `fileInput-${currentTableIndex}-${index}`;
-        input.id = uniqueId;
-        const label = input.nextElementSibling;
-        label.setAttribute('for', uniqueId);
-
-        // Add independent file upload listener
-        input.addEventListener('change', function() {
-            handleFileUpload(this);
-        });
-    });
-
-    // Unique checkbox handling
-    const checkboxes = clonedTableContainer.querySelectorAll('.checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('click', function() {
-            handleCheckboxClick(this);
-        });
-    });
-
-    // Create a new modal opener specific to this table
-    window[`openTableSpecificModal`] = function(tableIndex) {
-        // Reset current editing row
-        currentEditingRow = 0;
+    usersToRender.forEach(user => {
+        const userItem = document.createElement('div');
+        userItem.className = `user-item ${selectedUsers.has(user.id) ? 'selected' : ''}`;
         
-        const modal = document.getElementById('searchModal');
-        modal.style.display = 'block';
-
-        // Clear and initialize the selected contacts display
-        const selectedContactsDiv = document.getElementById('selectedContacts');
-        selectedContactsDiv.innerHTML = '';
-
-        // Use the table-specific contacts map
-        if (tableSpecificContacts.has(0)) {
-            const selectedContacts = tableSpecificContacts.get(0);
-            if (selectedContacts.size > 0) {
-                renderSelectedContacts();
-            }
-        }
-
-        renderContacts(contacts);
-
-        // Override save contacts to work with this specific table
-        window.saveContacts = function() {
-            if (currentEditingRow === null) return;
-            
-            const addDiscussionBtn = document.getElementById(`addDiscussionBtn-${tableIndex}`);
-            const selectedNamesDisplay = document.getElementById(`selectedNamesDisplay-${tableIndex}`);
-            const displayedNames = document.getElementById(`displayedNames-${tableIndex}`);
-            
-            const selectedContacts = tableSpecificContacts.get(currentEditingRow);
-            const names = Array.from(selectedContacts).map(contact => contact.name);
-
-            if (names.length > 0) {
-                displayedNames.textContent = names.join(' & ');
-                addDiscussionBtn.style.display = 'none';
-                selectedNamesDisplay.style.display = 'block';
-            }
-            
-            closeModal();
-        };
-
-        // Override toggle contact to work with this specific table
-        window.toggleContact = function(name, role) {
-            if (currentEditingRow === null) return;
-            
-            const contact = { name, role };
-            const rowSelectedContacts = tableSpecificContacts.get(currentEditingRow) || new Set();
-            
-            if (Array.from(rowSelectedContacts).some(c => c.name === name)) {
-                rowSelectedContacts.delete(Array.from(rowSelectedContacts).find(c => c.name === name));
-            } else {
-                rowSelectedContacts.add(contact);
-            }
-            
-            tableSpecificContacts.set(currentEditingRow, rowSelectedContacts);
-            renderSelectedContacts();
-            renderContacts(contacts);
-        };
-    };
+        const initials = getInitials(user.name);
+        userItem.innerHTML = `
+            <div class="avatar" style="background-color: ${getRandomColor()}">${initials}</div>
+            <div class="user-info">
+                <div class="user-name">${user.name}</div>
+                <div class="user-role">${user.role}</div>
+            </div>
+        `;
+        
+        userItem.onclick = () => toggleUser(user.id, userItem);
+        usersList.appendChild(userItem);
+    });
 }
 
-// Initialize the Add Table button when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    createAddTableButton();
+function showDiscussionModal(tableId) {
+    currentTableId = tableId;
+    const modal = document.getElementById('discussionModal');
+    modal.style.display = 'block';
+    renderUsers(users);
+}
+
+function toggleUser(userId, element) {
+    if (selectedUsers.has(userId)) {
+        selectedUsers.delete(userId);
+        element.classList.remove('selected');
+    } else {
+        selectedUsers.add(userId);
+        element.classList.add('selected');
+    }
+}
+
+const searchInput = document.querySelector('.search-input');
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredUsers = users.filter(user => 
+        user.name.toLowerCase().includes(searchTerm) || 
+        user.role.toLowerCase().includes(searchTerm)
+    );
+    renderUsers(filteredUsers);
 });
+
+document.querySelector('.close-btn').onclick = () => {
+    document.getElementById('discussionModal').style.display = 'none';
+};
+
+document.querySelector('.save-btn').onclick = () => {
+    if (selectedUsers.size > 0) {
+        const selectedNames = users
+            .filter(user => selectedUsers.has(user.id))
+            .map(user => user.name)
+            .join(', ');
+            
+        const discussionCell = document.querySelector(`#${currentTableId} td:first-child`);
+        discussionCell.innerHTML = `<div class="selected-participants">${selectedNames}</div>`;
+        
+        document.getElementById('discussionModal').style.display = 'none';
+    }
+};
+
+function manageDiscussion(tableId) {
+    showDiscussionModal(tableId);
+}
+
+window.onclick = (event) => {
+    const modal = document.getElementById('discussionModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+let currentNameTableId = null;
+const usedNames = new Set();
+
+function showNameModal(tableId) {
+    currentNameTableId = tableId;
+    const modal = document.getElementById('nameModal');
+    const input = document.getElementById('nameInput');
+    const error = document.getElementById('nameError');
+    
+    // Clear previous input and error
+    input.value = '';
+    error.style.display = 'none';
+    
+    modal.style.display = 'block';
+    input.focus();
+}
+
+// Update the original addName function
+function addName(tableId) {
+    showNameModal(tableId);
+}
+
+// Close modal when clicking the close button
+document.querySelector('.name-close-btn').onclick = () => {
+    document.getElementById('nameModal').style.display = 'none';
+};
+
+// Close modal when clicking outside
+window.onclick = (event) => {
+    const modal = document.getElementById('nameModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+// Handle name input and save
+document.getElementById('nameSaveBtn').onclick = () => {
+    const input = document.getElementById('nameInput');
+    const error = document.getElementById('nameError');
+    const name = input.value.trim();
+    
+    // Validate input
+    if (name === '') {
+        error.textContent = 'Please enter a name';
+        error.style.display = 'block';
+        return;
+    }
+    
+    // Check for duplicate names
+    if (usedNames.has(name.toLowerCase())) {
+        error.textContent = 'This name is already in use';
+        error.style.display = 'block';
+        return;
+    }
+    
+    // Save the name
+    usedNames.add(name.toLowerCase());
+    const cell = document.querySelector(`#${currentNameTableId} td:nth-child(3)`);
+    cell.innerHTML = `<span class="saved-name">${name}</span>`;
+    
+    // Close modal
+    document.getElementById('nameModal').style.display = 'none';
+};
+
+// Handle Enter key in input
+document.getElementById('nameInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('nameSaveBtn').click();
+    }
+});
+
+// Clear error message when typing
+document.getElementById('nameInput').addEventListener('input', () => {
+    document.getElementById('nameError').style.display = 'none';
+});
+
+        window.addEventListener('scroll', function() {
+            const button = document.querySelector('.add-table-button');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 20) {
+                button.style.top = '20px';
+                button.style.position = 'fixed';
+            } else {
+                button.style.top = '100px';
+                button.style.position = 'fixed';
+            }
+        });
     </script>
-    </div>
 </body>
 </html>
