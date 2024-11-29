@@ -48,7 +48,7 @@
 
         td {
             border: 2px solid #edede9;
-            padding: 16px;
+            padding: 50px;
             max-width: 500px;
             vertical-align: middle;
         }
@@ -427,7 +427,6 @@ body {
 
 .table-cell {
     padding: 10px;
-    border: 1px solid black;
     min-width: 200px;
 }
 
@@ -493,21 +492,6 @@ body {
             color: white;
             font-size: 28px;
             cursor: pointer;
-        }
-
-        .add-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 30px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-            width: 100%;
-        }
-
-        .add-btn:hover {
-            background-color: #45a049;
         }
 
         .companies-display {
@@ -718,6 +702,18 @@ body {
     margin-left: auto;
     transition: transform 0.3s ease;
 }
+
+.discussion-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .discussion-table th, .discussion-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
 
 .sub-agreement-content {
     padding: 10px;
@@ -1248,6 +1244,56 @@ body {
     display: none;
 }
 
+.discussion-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .discussion-table th {
+            background-color: #333;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .discussion-table td {
+            padding: 12px;
+            border-bottom: 1px solid #444;
+        }
+
+        .add-btn {
+            background-color: transparent;
+            border: 1px solid #666;
+            color: white;
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 5px;
+            white-space: nowrap;
+        }
+
+        .add-btn:hover {
+            background-color: #444;
+        }
+
+        .input-field {
+            background-color: #333;
+            border: 1px solid #666;
+            color: white;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        .party-row {
+            margin: 10px 0;
+        }
+
+        .discussion-content {
+            margin-left: 20px;
+        }
 
     </style>
 </head>
@@ -1688,24 +1734,6 @@ body {
         </div>
     </div>
 
-    <div id="discussionModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Select Contacts</h2>
-                <button class="save-btn">Save</button>
-            </div>
-            <button class="close-btn">×</button>
-            
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search contacts...">
-            </div>
-            
-            <div class="users-list" id="usersList">
-                <!-- Users will be added here dynamically -->
-            </div>
-        </div>
-    </div>
-
     <div id="nameModal" class="name-modal">
         <div class="name-modal-content">
             <div class="name-modal-header">
@@ -1759,6 +1787,42 @@ body {
         <div id="file-viewer-content"></div>
     </div>
 
+
+    <div id="tableModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTableModal()">&times;</span>
+            <table class="discussion-table">
+                <thead>
+                    <tr>
+                        <th style="color: white; text-align: center; vertical-align: middle;">Party name</th>
+                        <th style="color: white; text-align: center; vertical-align: middle;">Add discussion</th>
+                    </tr>
+                </thead>
+                <tbody id="discussionTableBody"></tbody>
+            </table>
+            <button class="add-btn" style="color: white; background-color: rgb(59, 155, 59);" onclick="openInputModal()">
+                <span>+</span> Add Discussion
+            </button>
+        </div>
+    </div>
+
+    <div id="inputModal" class="modal nested-modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeInputModal()">&times;</span>
+            <input type="text" id="partyName" placeholder="Party Name">
+            <input type="text" id="discussion" placeholder="Add Discussion">
+            <button class="save-btn" style="background-color: black; color:white;" onclick="saveDiscussion()">Save</button>
+        </div>
+    </div>
+    <!-- <div id="discussionModal" class="modal">
+        <div class="modal-content">
+            <h2>Add Discussion</h2>
+            <input type="text" id="partyNameInput" class="input-field" placeholder="Enter party name">
+            <input type="text" id="discussionInput" class="input-field" placeholder="Enter discussion">
+            <button class="add-btn" onclick="addDiscussion()">Add</button>
+        </div>
+    </div> -->
+
     <div id="toast" class="toast"></div>
 
     <script>
@@ -1774,7 +1838,7 @@ body {
            <thead>
     <tr>
         <th style="text-align: center; vertical-align: middle;">Initial Discussion</th>
-        <th style="text-align: center; vertical-align: middle;">Sub Agreement</th>
+        <th style="text-align: center; vertical-align: middle; max-width: 500px;">Sub Agreement</th>
         <th style="text-align: center; vertical-align: middle;">Product/ Service Specification</th>
         <th style="text-align: center; vertical-align: middle;">Payment Terms and Conditions</th>
         <th style="text-align: center; vertical-align: middle;">Platform Fee</th>
@@ -1787,10 +1851,13 @@ body {
             <tbody>
                 <tr>
                     <td>
-                        <button class="manage-btn" onclick="manageDiscussion('${tableId}')">
-                            <span>+</span>
-                            Add Discussion
+                        <button class="add-btn" style="background-color:blue;" onclick="openTableModal()">
+                            <span>+</span> Discussion
                         </button>
+                        <input type="file" id="fileInput-${tableId}" style="display:none" onchange="handleFileUpload(this, '${tableId}')">
+                            <label for="fileInput-${tableId}" class="upload-btn" style="margin-left: 10px;">
+                                Upload File
+                            </label>
                     </td>
                     <td>
                         <div class="checkbox-container">                           
@@ -1800,13 +1867,13 @@ body {
                             <label for="fileInput-${tableId}" class="upload-btn">
                                 Upload File
                             </label>
-                            <div id="uploaded-files-${tableId}" class="uploaded-files"></div>
+                            <div id="uploaded-files-${tableId}" class="uploaded-files" style="white-space: nowrap;"></div>
                         </div>
                     </td>
-                    <td>
+                    <td style="max-width: 200px; width: 400px;">
                         <button class="manage-btn" onclick="addName('${tableId}')">
                             <span>+</span>
-                            Add Name
+                            Add Details
                         </button>
                     </td>
                     
@@ -1838,10 +1905,10 @@ body {
                             Add Name
                         </button>
                     </td>
-                    <td>
-                    <div class="table-cell">
-                         <button class="manage-btn" onclick="addColumn()">Add Column</button>
-                    </div>
+                   <td style="text-align: center; vertical-align: middle;">
+                        <div class="table-cell">
+                        <button class="manage-btn" onclick="addColumn('${tableId}')">Add Column</button>
+                        </div>
                     </td>
                     <td>
                         <div class="checkbox-container">
@@ -1857,33 +1924,37 @@ body {
             container.insertAdjacentHTML('beforeend', tableHTML);
         }
 
-        function handleFileUpload(input, tableId) {
-            const uploadedFilesContainer = document.getElementById(`uploaded-files-${tableId}`);
-            
-            // Clear previous files
-            uploadedFilesContainer.innerHTML = '';
-            
-            // Process each uploaded file
-            for (let file of input.files) {
-                const fileItem = document.createElement('div');
-                fileItem.classList.add('file-item');
-                
-                // Create a view button for the file
-                const viewBtn = document.createElement('button');
-                viewBtn.textContent = 'View File';
-                viewBtn.classList.add('view-btn');
-                viewBtn.onclick = () => viewFile(file);
-                
-                // Display file name
-                const fileName = document.createElement('span');
-                // fileName.textContent = file.name;
-                
-                fileItem.appendChild(fileName);
-                fileItem.appendChild(viewBtn);
-                
-                uploadedFilesContainer.appendChild(fileItem);
-            }
-        }
+    function handleFileUpload(input, tableId) {
+    const uploadedFilesContainer = document.getElementById(`uploaded-files-${tableId}`);
+    const uploadButton = input.nextElementSibling; // Get the upload button
+    
+    // Hide only the upload button
+    uploadButton.style.display = 'none';
+    
+    // Clear previous files
+    uploadedFilesContainer.innerHTML = '';
+    
+    // Process each uploaded file
+    for (let file of input.files) {
+        const fileItem = document.createElement('div');
+        fileItem.classList.add('file-item');
+        
+        // Create view button
+        const viewBtn = document.createElement('button');
+        viewBtn.textContent = 'View File';
+        viewBtn.classList.add('view-btn');
+        viewBtn.onclick = () => viewFile(file);
+        
+        // Display file name
+        const fileName = document.createElement('span');
+        // fileName.textContent = file.name;
+        
+        fileItem.appendChild(fileName);
+        fileItem.appendChild(viewBtn);
+        
+        uploadedFilesContainer.appendChild(fileItem);
+    }
+}
 
         function viewFile(file) {
             const viewer = document.getElementById('file-viewer');
@@ -2005,6 +2076,8 @@ body {
                 button.style.position = 'fixed';
             }
         });
+
+
         function addColumn(tableId) {
     const nameModal = document.getElementById('nameModal');
     const nameInput = document.getElementById('nameInput');
@@ -2012,14 +2085,10 @@ body {
     const nameSaveBtn = document.getElementById('nameSaveBtn');
     const closeBtn = document.querySelector('.name-close-btn');
     
-    // Reset the input and error message
     nameInput.value = '';
     nameError.style.display = 'none';
-    
-    // Show the modal
     nameModal.style.display = 'block';
     
-    // Function to handle column addition
     const handleSave = () => {
         const name = nameInput.value.trim();
         
@@ -2034,14 +2103,14 @@ body {
         
         const newHeader = document.createElement('th');
         newHeader.textContent = name;
+        newHeader.style.textAlign = 'center';  // Center align the header text
         
         const newCell = document.createElement('td');
+        newCell.style.textAlign = 'center';    // Center align the cell content
         newCell.innerHTML = `
-            <div class="checkbox-container" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="containers" style="display: flex; justify-content: center; margin-bottom: 5px; gap: 8px;">
-                <div class="checkbox" onclick="handleCheckbox(this, '${tableId}')"></div>
-                <div class="checkbox" onclick="handleCheckbox(this, '${tableId}')"></div>
-                </div>
+            <div class="checkbox-container">
+                <div class="checkbox" style="margin-top: 15px;" onclick="handleCheckbox(this, '${tableId}')"></div>
+                <div class="checkbox" style="margin-top: 15px;" onclick="handleCheckbox(this, '${tableId}')"></div>
                 <input type="file" id="fileInput-${Date.now()}" style="display:none">
                 <label for="fileInput-${Date.now()}" class="upload-btn">Upload File</label>
             </div>
@@ -2051,148 +2120,40 @@ body {
         headerRow.insertBefore(newHeader, addColumnTh);
         dataRow.insertBefore(newCell, dataRow.querySelector('td:nth-last-child(2)'));
         
-        // Close the modal
         nameModal.style.display = 'none';
         
-        // Remove event listeners
         nameSaveBtn.removeEventListener('click', handleSave);
         closeBtn.removeEventListener('click', handleClose);
         window.removeEventListener('click', handleOutsideClick);
     };
     
-    // Function to handle modal closing
     const handleClose = () => {
         nameModal.style.display = 'none';
-        
-        // Remove event listeners
         nameSaveBtn.removeEventListener('click', handleSave);
         closeBtn.removeEventListener('click', handleClose);
         window.removeEventListener('click', handleOutsideClick);
     };
     
-    // Function to handle clicking outside the modal
     const handleOutsideClick = (event) => {
         if (event.target === nameModal) {
             handleClose();
         }
     };
     
-    // Add event listeners
     nameSaveBtn.addEventListener('click', handleSave);
     closeBtn.addEventListener('click', handleClose);
     window.addEventListener('click', handleOutsideClick);
     
-    // Handle Enter key press
     nameInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             handleSave();
         }
     });
     
-    // Clear error message when typing
     nameInput.addEventListener('input', () => {
         nameError.style.display = 'none';
     });
 }
-
-        const users = [
-    { id: 1, name: 'Emma Davis', role: 'Project Lead' },
-    { id: 2, name: 'Frank Miller', role: 'Business Analyst' },
-    { id: 3, name: 'Grace Lee', role: 'Software Engineer' },
-    { id: 4, name: 'Henry Wilson', role: 'Quality Assurance' },
-    { id: 5, name: 'Ivy Chen', role: 'Data Scientist' },
-    { id: 6, name: 'Jack Parker', role: 'UX Designer' }
-];
-
-let selectedUsers = new Set();
-let currentTableId = null;
-
-function getInitials(name) {
-    return name.split(' ').map(n => n[0]).join('');
-}
-
-function getRandomColor() {
-    const colors = ['#20B2AA', '#4682B4', '#6A5ACD', '#008080', '#2E8B57', '#4169E1'];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function renderUsers(usersToRender) {
-    const usersList = document.getElementById('usersList');
-    usersList.innerHTML = '';
-    
-    usersToRender.forEach(user => {
-        const userItem = document.createElement('div');
-        userItem.className = `user-item ${selectedUsers.has(user.id) ? 'selected' : ''}`;
-        
-        const initials = getInitials(user.name);
-        userItem.innerHTML = `
-            <div class="avatar" style="background-color: ${getRandomColor()}">${initials}</div>
-            <div class="user-info">
-                <div class="user-name">${user.name}</div>
-                <div class="user-role">${user.role}</div>
-            </div>
-        `;
-        
-        userItem.onclick = () => toggleUser(user.id, userItem);
-        usersList.appendChild(userItem);
-    });
-}
-
-function showDiscussionModal(tableId) {
-    currentTableId = tableId;
-    const modal = document.getElementById('discussionModal');
-    modal.style.display = 'block';
-    renderUsers(users);
-}
-
-function toggleUser(userId, element) {
-    if (selectedUsers.has(userId)) {
-        selectedUsers.delete(userId);
-        element.classList.remove('selected');
-    } else {
-        selectedUsers.add(userId);
-        element.classList.add('selected');
-    }
-}
-
-const searchInput = document.querySelector('.search-input');
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredUsers = users.filter(user => 
-        user.name.toLowerCase().includes(searchTerm) || 
-        user.role.toLowerCase().includes(searchTerm)
-    );
-    renderUsers(filteredUsers);
-});
-
-document.querySelector('.close-btn').onclick = () => {
-    document.getElementById('discussionModal').style.display = 'none';
-};
-
-document.querySelector('.save-btn').onclick = () => {
-    if (selectedUsers.size > 0) {
-        const selectedNames = users
-            .filter(user => selectedUsers.has(user.id))
-            .map(user => user.name)
-            .join(', ');
-            
-        const discussionCell = document.querySelector(`#${currentTableId} td:first-child`);
-        discussionCell.innerHTML = `<div class="selected-participants">${selectedNames}</div>`;
-        
-        document.getElementById('discussionModal').style.display = 'none';
-    }
-};
-
-function manageDiscussion(tableId) {
-    showDiscussionModal(tableId);
-}
-
-window.onclick = (event) => {
-    const modal = document.getElementById('discussionModal');
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-};
 
 let currentNameTableId = null;
 const usedNames = new Set();
@@ -2282,6 +2243,58 @@ document.getElementById('nameInput').addEventListener('input', () => {
                 button.style.position = 'fixed';
             }
         });
+
+        const tableModal = document.getElementById('tableModal');
+    const inputModal = document.getElementById('inputModal');
+    const tableBody = document.getElementById('discussionTableBody');
+
+    function openTableModal() {
+        tableModal.style.display = "block";
+    }
+
+    function closeTableModal() {
+        tableModal.style.display = "none";
+    }
+
+    function openInputModal() {
+        inputModal.style.display = "block";
+    }
+
+    function closeInputModal() {
+        inputModal.style.display = "none";
+    }
+
+    function saveDiscussion() {
+        const partyName = document.getElementById('partyName').value;
+        const discussion = document.getElementById('discussion').value;
+
+        if (partyName && discussion) {
+    const row = tableBody.insertRow();
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    
+    cell1.textContent = partyName;
+    cell2.textContent = discussion;
+    cell1.style.color = "black";
+    cell2.style.color = "black";
+    cell1.style.textAlign = "center";
+    cell2.style.textAlign = "center";
+
+    document.getElementById('partyName').value = '';
+    document.getElementById('discussion').value = '';
+    closeInputModal();
+}
+    }
+
+    window.onclick = function(event) {
+        if (event.target == tableModal) {
+            closeTableModal();
+        }
+        if (event.target == inputModal) {
+            closeInputModal();
+        }
+    }
+        
     </script>
 </body>
 </html>
