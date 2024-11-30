@@ -1102,6 +1102,8 @@ body {
             left: calc(250px + 40px); /* Sidebar width + some padding */
             top: 100px; /* Below navbar */
             width: 60px;
+            margin-left: -240px;
+            margin-bottom: 30px;
             height: 60px;
             border-radius: 50%;
             background: #0056b3;
@@ -1124,10 +1126,20 @@ body {
 
         /* Tables container styling */
         #tables-container {
-            margin-left: 40px; /* Align with the button */
-            padding: 20px;
-            overflow-x: auto;
-        }
+    padding: 20px;
+    overflow-x: auto;
+    margin-left: -240px; /* Default for mobile */
+}
+
+/* Desktop breakpoint */
+@media screen and (min-width: 1024px) {
+    #tables-container {
+        margin-left: 20px; /* Positive margin for desktop */
+    }
+    .add-table-button {
+                margin-left: 20px;
+            }
+}
 
         /* Table styling */
         .table-container {
@@ -1145,7 +1157,7 @@ body {
             }
 
             .add-table-button {
-                left: 20px;
+                margin-left: 240px;
             }
 
             #tables-container {
