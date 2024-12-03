@@ -240,9 +240,156 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        .dashboard { max-width: 1200px; margin: 0 auto; }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .metric-title {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        .chart-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 300px;
+        }
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .trend-up { color: #4CAF50; }
+        .trend-down { color: #f44336; }
 
 
+        .info-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            margin-top: 70px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
 
+        @media (max-width: 768px) {
+            .info-section {
+                margin-top: 0;
+            }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .info-card h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.4;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .certifications {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .certifications h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .certifications p {
+            color: #666;
+            line-height: 1.4;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-section p {
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .product-section .title {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        .product-section .description {
+            color: #666;
+            font-size: 0.95rem;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .product-section {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -680,29 +827,65 @@
                     <p>Advocate</p>
                     <p style="margin-top: -8px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio inventore!</p>
                 </div>
-                <div class="card licenses" style="margin-top: 70px;">
-                    <div style="display: flex;">
-                    <div>
-                    <h3>Regions Served</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.  dolores cumque magni ipsum illum voluptatum!</p>
+
+            <div class="info-section">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Regions Served</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. dolores cumque magni ipsum illum voluptatum!</p>
+                     </div>
+                    <div class="info-card">
+                        <h3>Engagement Role</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
                     </div>
-                    <div>
-                    <h3>Engagement Role</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
-                    </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 30px;">
-                    <h3>Licenses and Certifications</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
+                </div>
+                    <div class="certifications">
+                        <h3>Licenses and Certifications</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
                     </div>
                 </div>
             </div>
 
-            <div class="card" style="margin-top:20px;">
-                <h3>Products/Services Offered</h3>
-                <p class="mt-4">Detailed catalogue/ PPT of products or services: </p>
-                <p class="mt-4">Unique offerings:</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam repellat veniam, facilis aliquid voluptatem id enim quaerat expedita reprehenderit fugit!</p>
+            <h2 style="margin-bottom: 20px ;">Performance Overview</h2>
+
+            <div class="dashboard">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-title">Total Inquiries</div>
+                        <div class="metric-value">347</div>
+                        <div class="trend-up">↑ 12%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Deals Closed</div>
+                        <div class="metric-value">122</div>
+                        <div class="trend-up">↑ 8%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Profile Views</div>
+                        <div class="metric-value">2,360</div>
+                        <div class="trend-up">↑ 15%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Stakeholder Rating</div>
+                        <div class="metric-value">4.8/5.0</div>
+                        <div class="trend-up">↑ 0.2</div>
+                    </div>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <canvas id="inquiriesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <canvas id="feedbackChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 26px;">Products/Services Offered</h2>
+            <div class="product-section">
+                <p class="title">Detailed catalogue/ PPT of products or services:</p>
+                <p class="title">Unique offerings:</p>
+                <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam repellat veniam, facilis aliquid voluptatem id enim quaerat expedita reprehenderit fugit!</p>
             </div>
 
             <div class="profile-grid">
@@ -741,8 +924,14 @@
                     </div>
                 </div>
             </div>
+
+
+            
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
 
     <script>
         // Initialize charts
@@ -793,6 +982,72 @@
 
         // Initialize charts when the page loads
         window.onload = initializeCharts;
+
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+        const inquiriesData = [45, 52, 58, 65, 72, 80];
+        const dealsData = [12, 15, 18, 22, 25, 30];
+        const ratingsData = [4.5, 4.6, 4.7, 4.8, 4.7, 4.9];
+
+        // Inquiries and Deals Chart
+        new Chart(document.getElementById('inquiriesChart'), {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Inquiries',
+                    data: inquiriesData,
+                    borderColor: '#2196F3',
+                    tension: 0.4
+                }, {
+                    label: 'Deals',
+                    data: dealsData,
+                    borderColor: '#4CAF50',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Inquiries & Deals Trend'
+                    }
+                }
+            }
+        });
+
+        // Feedback Ratings Chart
+        new Chart(document.getElementById('feedbackChart'), {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Stakeholder Rating',
+                    data: ratingsData,
+                    borderColor: '#FFC107',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(255, 193, 7, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Stakeholder Ratings Trend'
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 4,
+                        max: 5
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
