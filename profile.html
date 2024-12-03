@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page with Sidebar</title>
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/5.3.6/simplebar.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <script src="assets/js/plugin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: #F5F5F5;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .vertical-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #2a3042;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .menu-title {
+            padding: 12px 20px;
+            color: #6a7187;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .text-style {
+            color: #a6b0cf;
+            display: block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .text-style:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .vertical-menu a {
+            text-decoration: none;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: 80%;
+            color: black;
+        }
+
+        .card2 {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .profile-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-basic {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin: 0 auto 1rem;
+        }
+
+        .licenses {
+            padding: 30px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 200px;
+        }
+
+        .initiatives {
+            margin-top: 2rem;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f8f8;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+        }
+
+        .status.ongoing {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status.completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: #2a3042;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .vertical-menu {
+                transform: translateX(-100%);
+            }
+
+            .vertical-menu.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 70px;
+            }
+            
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .circle-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .circle-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box">
+                    <a href="index.html" class="logo logo-dark">
+                        <!-- <span class="logo-sm">
+                            <img src="assets/images/logo.svg" alt="" height="22">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-dark.png" alt="" height="17">
+                        </span> -->
+                    </a>
+
+                    <!-- <a href="index.html" class="logo logo-light">
+                        <span class="logo-sm">
+                            <img src="assets/images/logo-light.svg" alt="" height="22">
+                        </span>
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-light.png" alt="" height="19">
+                        </span>
+                    </a> -->
+                </div>
+
+                <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn" 
+                >
+            <i class="fa fa-fw fa-bars"></i>
+                </button>
+
+                
+
+                <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
+                    <!-- <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                        <span key="t-megamenu">Mega Menu</span>
+                        <i class="mdi mdi-chevron-down"></i> 
+                    </button> -->
+                    <div class="dropdown-menu dropdown-megamenu">
+                        <div class="row">
+                            <div class="col-sm-8">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5 class="font-size-14" key="t-ui-components">UI Components</h5>
+                                        <ul class="list-unstyled megamenu-list">
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-lightbox">Lightbox</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-range-slider">Range Slider</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-sweet-alert">Sweet Alert</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-rating">Rating</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-forms">Forms</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-tables">Tables</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-charts">Charts</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <h5 class="font-size-14" key="t-applications">Applications</h5>
+                                        <ul class="list-unstyled megamenu-list">
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-ecommerce">Ecommerce</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-calendar">Calendar</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-email">Email</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-projects">Projects</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-tasks">Tasks</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-contacts">Contacts</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <h5 class="font-size-14" key="t-extra-pages">Extra Pages</h5>
+                                        <ul class="list-unstyled megamenu-list">
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-light-sidebar">Light Sidebar</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-compact-sidebar">Compact Sidebar</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-horizontal">Horizontal layout</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-maintenance">Maintenance</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-coming-soon">Coming Soon</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-timeline">Timeline</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-faqs">FAQs</a>
+                                            </li>
+                    
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h5 class="font-size-14" key="t-ui-components">UI Components</h5>
+                                        <ul class="list-unstyled megamenu-list">
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-lightbox">Lightbox</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-range-slider">Range Slider</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-sweet-alert">Sweet Alert</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-rating">Rating</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-forms">Forms</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-tables">Tables</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" key="t-charts">Charts</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <div>
+                                            <img src="assets/images/megamenu-img.png" alt="" class="img-fluid mx-auto d-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex">
+
+                <div class="dropdown d-inline-block d-lg-none ms-2">
+                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                        aria-labelledby="page-header-search-dropdown">
+
+                        <form class="p-3">
+                            <div class="form-group m-0">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img id="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="en">
+                            <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
+                        </a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
+                            <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
+                            <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
+                            <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
+                            <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="dropdown d-none d-lg-inline-block ms-1">
+                    <button type="button" class="btn header-item noti-icon waves-effect"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-customize"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                        <div class="px-lg-2">
+                            <div class="row g-0">
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="assets/images/brands/github.png" alt="Github">
+                                        <span>GitHub</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="assets/images/brands/bitbucket.png" alt="bitbucket">
+                                        <span>Bitbucket</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="assets/images/brands/dribbble.png" alt="dribbble">
+                                        <span>Dribbble</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row g-0">
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="assets/images/brands/dropbox.png" alt="dropbox">
+                                        <span>Dropbox</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="assets/images/brands/mail_chimp.png" alt="mail_chimp">
+                                        <span>Mail Chimp</span>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="assets/images/brands/slack.png" alt="slack">
+                                        <span>Slack</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown d-none d-lg-inline-block ms-1">
+                    <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                        <i class="bx bx-fullscreen"></i>
+                    </button>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-bell bx-tada"></i>
+                        <span class="badge bg-danger rounded-pill">3</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                        aria-labelledby="page-header-notifications-dropdown">
+                        <div class="p-3">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-0" key="t-notifications"> Notifications </h6>
+                                </div>
+                                <div class="col-auto">
+                                    <a href="#!" class="small" key="t-view-all"> View All</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-simplebar style="max-height: 230px;">
+                            <a href="javascript: void(0);" class="text-reset notification-item">
+                                <div class="d-flex">
+                                    <div class="avatar-xs me-3">
+                                        <span class="avatar-title bg-primary rounded-circle font-size-16">
+                                            <i class="bx bx-cart"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1" key="t-your-order">Your order is placed</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1" key="t-grammer">If several languages coalesce the grammar</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="javascript: void(0);" class="text-reset notification-item">
+                                <div class="d-flex">
+                                    <img src="assets/images/users/avatar-3.jpg"
+                                        class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">James Lemire</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1" key="t-simplified">It will seem like simplified English.</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-hours-ago">1 hours ago</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="javascript: void(0);" class="text-reset notification-item">
+                                <div class="d-flex">
+                                    <div class="avatar-xs me-3">
+                                        <span class="avatar-title bg-success rounded-circle font-size-16">
+                                            <i class="bx bx-badge-check"></i>
+                                        </span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1" key="t-shipped">Your item is shipped</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1" key="t-grammer">If several languages coalesce the grammar</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="javascript: void(0);" class="text-reset notification-item">
+                                <div class="d-flex">
+                                    <img src="assets/images/users/avatar-4.jpg"
+                                        class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Salena Layfield</h6>
+                                        <div class="font-size-12 text-muted">
+                                            <p class="mb-1" key="t-occidental">As a skeptical Cambridge friend of mine occidental.</p>
+                                            <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-hours-ago">1 hours ago</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="p-2 border-top d-grid">
+                            <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">View More..</span> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                            alt="Header Avatar">
+                        <span class="d-none d-xl-inline-block ms-1" key="t-henry">Hriday Sarma</span>
+                        <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <!-- item-->
+                        <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
+                        <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My Wallet</span></a>
+                        <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
+                        <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Lock screen</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+                    </div>
+                </div>
+
+                <!-- <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                        <i class="bx bx-cog bx-spin"></i>
+                    </button>
+                </div> -->
+
+            </div>
+        </div>
+    </header>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div class="vertical-menu">
+        <div class="h-200">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">Menu</li>
+                    <li>
+                        <a href="index.html">
+                            <span class="text-style">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-title">Apps</li>
+                    <li>
+                        <a href="search.html">
+                            <span class="text-style">Vendor Search</span>
+                        </a>
+                        <a href="chat.html">
+                            <span class="text-style">Discussion</span>
+                        </a>
+                        <a href="business-operation.html">
+                            <span class="text-style">Business Operation</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="profile-header">
+                <div class="card profile-basic" style="margin-top: 70px;">
+                    <div class="circle-container">
+                        <img src="assets/images/hriday.jpeg" class="circle-image">
+                    </div>                    
+                    <h2>Hriday Sarma</h2>
+                    <p>Advocate</p>
+                    <p style="margin-top: -8px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio inventore!</p>
+                </div>
+                <div class="card licenses" style="margin-top: 70px;">
+                    <div style="display: flex;">
+                    <div>
+                    <h3>Regions Served</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.  dolores cumque magni ipsum illum voluptatum!</p>
+                    </div>
+                    <div>
+                    <h3>Engagement Role</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
+                    </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                    <h3>Licenses and Certifications</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:20px;">
+                <h3>Products/Services Offered</h3>
+                <p class="mt-4">Detailed catalogue/ PPT of products or services: </p>
+                <p class="mt-4">Unique offerings:</p>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam repellat veniam, facilis aliquid voluptatem id enim quaerat expedita reprehenderit fugit!</p>
+            </div>
+
+            <div class="profile-grid">
+                <div class="card2">
+                    <h3>Past Interactions</h3>
+                    <div class="chart-container">
+                        <canvas id="pastInteractionsChart"></canvas>
+                    </div>
+                </div>
+                <div class="card2">
+                    <h3>Key Collaborations</h3>
+                    <div class="chart-container">
+                        <canvas id="collaborationsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card initiatives">
+                <h3>Ongoing and Upcoming Initiatives</h3>
+                <div class="tab-container">
+                    <div class="tab active" onclick="switchTab('ongoing')">Ongoing</div>
+                    <div class="tab" onclick="switchTab('upcoming')">Upcoming</div>
+                </div>
+                <div id="projectsList">
+                    <div class="project">
+                        <span>Project 1</span>
+                        <span class="status completed">Completed</span>
+                    </div>
+                    <div class="project">
+                        <span>Project 2</span>
+                        <span class="status ongoing">Ongoing</span>
+                    </div>
+                    <div class="project">
+                        <span>Project 3</span>
+                        <span class="status ongoing">Ongoing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize charts
+        function initializeCharts() {
+            const chartConfig = {
+                type: 'doughnut',
+                data: {
+                    labels: ['File 1', 'File 2', 'File 3', 'File 4'],
+                    datasets: [{
+                        data: [25, 25, 25, 25],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#60a5fa',
+                            '#93c5fd',
+                            '#bfdbfe'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
+            };
+
+            new Chart(
+                document.getElementById('pastInteractionsChart'),
+                chartConfig
+            );
+
+            new Chart(
+                document.getElementById('collaborationsChart'),
+                chartConfig
+            );
+        }
+
+        // Tab switching functionality
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Menu toggle functionality
+        function toggleMenu() {
+            const menu = document.querySelector('.vertical-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Initialize charts when the page loads
+        window.onload = initializeCharts;
+    </script>
+</body>
+</html>
