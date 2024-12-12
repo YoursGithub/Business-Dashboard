@@ -88,7 +88,7 @@
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            height: 80%;
+            height: 85.1%;
             color: black;
         }
 
@@ -241,8 +241,343 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        .dashboard { max-width: 1200px; margin: 0 auto; }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .metric-title {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        .chart-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 300px;
+        }
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .trend-up { color: #4CAF50; }
+        .trend-down { color: #f44336; }
 
 
+        .info-section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            margin-top: 70px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .info-section {
+                margin-top: 0;
+            }
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .info-card {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .info-card h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        .info-card p {
+            color: #666;
+            line-height: 1.4;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+
+        .dashboards {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 1000px;
+            padding: 40px;
+        }
+        .social-handles {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .handle-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .handle-logo {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f2f5;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .handle-logo:hover {
+            background-color: #e0e4ea;
+            transform: scale(1.1);
+        }
+        .metrics, .community-interaction {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-cards, .interaction-card {
+            background-color: #f9f9fc;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e9ecf3;
+            transition: transform 0.3s ease;
+        }
+        .metric-cards:hover, .interaction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+        }
+        .metric-cards h4, .interaction-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .metric-cards p, .interaction-card p {
+            color: #7f8c8d;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #3498db;
+        }
+        @media screen and (max-width: 768px) {
+            .dashboards {
+                padding: 20px;
+            }
+            .social-handles, .metrics, .community-interaction {
+                grid-template-columns: 1fr;
+            }
+            .handle-group {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+
+
+        .networking-dashboard {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px;
+        }
+        .section-title {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #3498db;
+        }
+        .stakeholder-network {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .network-entity {
+            background-color: #f9f9fc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e9ecf3;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .network-entity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            background-color: #f0f4f8;
+        }
+        .network-entity-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #e0e4ea;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .network-entity h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .network-entity p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .connections-facilitated {
+            background-color: #f9f9fc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e9ecf3;
+        }
+        .connection-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .connection-details {
+            flex-grow: 1;
+        }
+        .connection-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .status-completed {
+            background-color: #e6f3e6;
+            color: #2e7d32;
+        }
+        .status-pending {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+        @media screen and (max-width: 768px) {
+            .networking-dashboard {
+                padding: 20px;
+            }
+            .stakeholder-network {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        .professional-details {
+            background-color: white;
+            margin-top: 70px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .details-header {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .details-header > div {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .licenses-section {
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        p {
+            color: #666;
+        }
+
+        @media screen and (max-width: 768px) {
+            .details-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .details-header > div {
+                width: 100%;
+            }
+        }
 
     </style>
 </head>
@@ -676,25 +1011,59 @@
                         <img src="assets/images/hriday.jpeg" class="circle-image">
                     </div>                    
                     <h2>Hriday Sarma</h2>
-                    <p>Advocate</p>
-                    <p style="margin-top: -8px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio inventore!</p>
+                    <h3>Advocate</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio inventore!</p>
                 </div>
-                <div class="card licenses" style="margin-top: 70px;">
-                    <div style="display: flex;">
-                    <div>
-                    <h3>Regions Served</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.  dolores cumque magni ipsum illum voluptatum!</p>
+                <div class="professional-details">
+                    <div class="details-header">
+                        <div>
+                            <h3>Regions Served</h3>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores cumque magni ipsum illum voluptatum!</p>
+                        </div>
+                        <div>
+                            <h3>Engagement Role</h3>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
+                        </div>
                     </div>
-                    <div>
-                    <h3>Engagement Role</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
-                    </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 30px;">
-                    <h3>Licenses and Certifications</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
+                    <div class="licenses-section">
+                        <h3>Licenses and Certifications</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi dolores cumque magni ipsum illum voluptatum!</p>
                     </div>
                 </div>
+            </div>
+
+            <h2 style="margin-bottom: 20px ;">Performance Overview</h2>
+            <div class="dashboard">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-title">Total Inquiries</div>
+                        <div class="metric-value">347</div>
+                        <div class="trend-up">↑ 12%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Deals Closed</div>
+                        <div class="metric-value">122</div>
+                        <div class="trend-up">↑ 8%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Profile Views</div>
+                        <div class="metric-value">2,360</div>
+                        <div class="trend-up">↑ 15%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Stakeholder Rating</div>
+                        <div class="metric-value">4.8/5.0</div>
+                        <div class="trend-up">↑ 0.2</div>
+                    </div>
+                </div>
+                <!-- <div class="charts-grid">
+                    <div class="chart-card">
+                        <canvas id="inquiriesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <canvas id="feedbackChart"></canvas>
+                    </div>
+                </div> -->
             </div>
 
             <div class="card" style="margin-top:20px;">
@@ -740,6 +1109,116 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="networking-dashboard" style="margin-top: 50px;">
+                <h2 class="section-title">Networking and Connections</h2>
+                
+                <div class="stakeholder-network">
+                    <div class="network-entity">
+                        <div class="network-entity-icon">TEC</div>
+                        <h4>Tech Ecosystem</h4>
+                        <p>Innovation and technology sector connections</p>
+                    </div>
+                    <div class="network-entity">
+                        <div class="network-entity-icon">FIN</div>
+                        <h4>Financial Services</h4>
+                        <p>Banking and investment network</p>
+                    </div>
+                    <div class="network-entity">
+                        <div class="network-entity-icon">STR</div>
+                        <h4>Startup Ecosystem</h4>
+                        <p>Emerging businesses and entrepreneurs</p>
+                    </div>
+                    <div class="network-entity">
+                        <div class="network-entity-icon">GVT</div>
+                        <h4>Government Relations</h4>
+                        <p>Public sector and policy connections</p>
+                    </div>
+                </div>
+        
+                <div class="connections-facilitated">
+                    <h3 style="margin-bottom: 20px; color: #2c3e50;">Connections Facilitated</h3>
+                    <div class="connection-item">
+                        <div class="connection-details">
+                            <h4>Tech Startup Intro</h4>
+                            <p>Connected AI innovation startup with venture capital firm</p>
+                        </div>
+                        <div class="connection-status status-completed">Completed</div>
+                    </div>
+                    <div class="connection-item">
+                        <div class="connection-details">
+                            <h4>Investment Referral</h4>
+                            <p>Facilitated meeting between green energy project and investors</p>
+                        </div>
+                        <div class="connection-status status-pending">Pending</div>
+                    </div>
+                    <div class="connection-item">
+                        <div class="connection-details">
+                            <h4>Strategic Partnership</h4>
+                            <p>Introduced cybersecurity firm to potential enterprise client</p>
+                        </div>
+                        <div class="connection-status status-completed">Completed</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="dashboards">
+                <h2>Social Media Presence</h2>
+                
+                <div class="social-handles">
+                    <div class="handle-group">
+                        <div class="handle-logo">FB</div>
+                        <div class="handle-logo">TW</div>
+                        <div class="handle-logo">IG</div>
+                        <div class="handle-logo">YT</div>
+                    </div>
+                    <div class="handle-group">
+                        <div class="handle-logo">TG</div>
+                        <div class="handle-logo">VK</div>
+                        <div class="handle-logo">IG</div>
+                        <div class="handle-logo">RT</div>
+                    </div>
+                </div>
+        
+                <div class="metrics">
+                    <div class="metric-cards">
+                        <h4>Follower Count</h4>
+                        <p>Total Followers: 250,000</p>
+                    </div>
+                    <div class="metric-cards">
+                        <h4>Post Reach</h4>
+                        <p>Average Reach: 75,000</p>
+                    </div>
+                    <div class="metric-cards">
+                        <h4>Audience Demographics</h4>
+                        <p>Age: 25-45, Location: Global</p>
+                    </div>
+                </div>
+        
+                <div class="community-interaction">
+                    <div class="interaction-card">
+                        <h4>Key Collaborations</h4>
+                        <p>Notable partnerships and events</p>
+                    </div>
+                    <div class="interaction-card">
+                        <h4>Community Events</h4>
+                        <p>Upcoming and past engagement activities</p>
+                    </div>
+                    <div class="interaction-card">
+                        <h4>Engagement Insights</h4>
+                        <p>Detailed community interaction analysis</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- -------- -->
+
+            
         </div>
     </div>
 
