@@ -347,7 +347,7 @@
 
 
         .dashboards {
-            background-color: white;
+            background-color: #e9c46a;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             width: 100%;
@@ -720,6 +720,25 @@
             .visibility-recognition-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .upload-container {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .upload-preview {
+            margin-top: 20px;
+        }
+
+        .upload-preview img, 
+        .upload-preview video, 
+        .upload-preview audio {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 5px;
         }
 
     </style>
@@ -1209,6 +1228,17 @@
                 </div> -->
             </div>
 
+            <div class="upload-container">
+                <label for="media-upload" class="upload-label">
+                    <button class="btn btn-primary">Upload Media</button>
+                </label>
+                <input id="media-upload" type="file" accept="image/*, video/*, audio/*" style="display: none;" />
+        
+                <div class="upload-preview" id="upload-preview">
+                    <p>No file uploaded yet.</p>
+                </div>
+            </div>
+
             <div class="card" style="margin-top:20px;">
                 <h3>Products/Services Offered</h3>
                 <p class="mt-4">Detailed catalogue/ PPT of products or services: </p>
@@ -1271,22 +1301,22 @@
                         </div>
                         <div class="visibility-case-study">
                             <div class="visibility-case-icon">TRN</div>
-                            <h4>Business Catalogue/ Presentation</h4>
+                            <h4>Business/ Team Structure</h4>
                             <p>Enabling digital ecosystem growth through strategic technological interventions</p>
                         </div>
                         <div class="visibility-case-study">
                             <div class="visibility-case-icon">GLB</div>
-                            <h4>Team Overview</h4>
-                            <p>Facilitating cross-border innovation and knowledge exchange</p>
-                        </div>
-                        <div class="visibility-case-study">
-                            <div class="visibility-case-icon">GLB</div>
-                            <h4>Key Achievements/USP</h4>
+                             <h4>Key Achievements/USP</h4>
                             <p>Facilitating cross-border innovation and knowledge exchange</p>
                         </div>
                         <div class="visibility-case-study">
                             <div class="visibility-case-icon">GLB</div>
                             <h4>Success Stories</h4>
+                            <p>Facilitating cross-border innovation and knowledge exchange</p>
+                        </div>
+                        <div class="visibility-case-study">
+                            <div class="visibility-case-icon">GLB</div>
+                            <h4>Key Requirements</h4>
                             <p>Facilitating cross-border innovation and knowledge exchange</p>
                         </div>
                         
@@ -1546,6 +1576,43 @@
 
         // Initialize charts when the page loads
         window.onload = initializeCharts;
+
+
+        const mediaUpload = document.getElementById("media-upload");
+        const uploadPreview = document.getElementById("upload-preview");
+
+        mediaUpload.addEventListener("change", (event) => {
+            const file = event.target.files[0]; // Get the uploaded file
+            uploadPreview.innerHTML = ""; // Clear any existing content
+
+            if (file) {
+                const fileURL = URL.createObjectURL(file); // Create a temporary URL for the file
+                let element;
+
+                // Check file type and create appropriate element
+                if (file.type.startsWith("image/")) {
+                    element = document.createElement("img");
+                } else if (file.type.startsWith("video/")) {
+                    element = document.createElement("video");
+                    element.controls = true;
+                } else if (file.type.startsWith("audio/")) {
+                    element = document.createElement("audio");
+                    element.controls = true;
+                } else {
+                    element = document.createElement("p");
+                    element.textContent = "Unsupported file type!";
+                }
+
+                // Set the file URL as the source for the created element
+                if (element) {
+                    element.src = fileURL;
+                    uploadPreview.appendChild(element);
+                }
+            } else {
+                // If no file is selected
+                uploadPreview.innerHTML = "<p>No file uploaded yet.</p>";
+            }
+        });
     </script>
 </body>
 </html>
