@@ -46,7 +46,6 @@
 }
 
 .animated-btn:hover {
-    background-color: #007bff; /* Highlighted color */
     color: #fff;
     transform: scale(1.1); /* Slight scaling */
     border: 2px solid #fff; /* Glowing border */
@@ -60,6 +59,93 @@
     transform: translateX(5px); /* Arrow animation */
     transition: transform 0.3s ease-in-out;
 }
+
+.card {
+            /* padding: 1.5rem; */
+            background: #fff;
+            border-radius: 0.25rem;
+            box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+        }
+        
+        .mini-stats-wid {
+            cursor: pointer;
+        }
+        
+        .d-flex {
+            display: flex;
+        }
+        
+        .flex-grow-1 {
+            flex-grow: 1;
+        }
+        
+        .text-muted {
+            color: #74788d;
+        }
+        
+        .fw-medium {
+            font-weight: 500;
+        }
+        
+        .mb-0 {
+            margin-bottom: 0;
+        }
+        
+        .avatar-sm {
+            width: 3rem;
+            height: 3rem;
+        }
+        
+        .rounded-circle {
+            border-radius: 50%;
+        }
+        
+        .bg-primary {
+            background-color: #556ee6 !important;
+        }
+        
+        .align-self-center {
+            align-self: center;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 4px;
+        }
+        
+        .modal-header {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .notification-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
 
 </style>
 
@@ -493,7 +579,7 @@
                                     <span key="t-dashboards">Discussion</span>
                                 </a>
                                 <a href="business-operation.html">
-                                    <span key="t-dashboards">Business Operation</span>
+                                    <span key="t-dashboards">Business Operations</span>
                                 </a>
                             </li>
     
@@ -567,7 +653,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-4">
-                                                        <a href="profile.html" class="btn btn-primary waves-effect waves-light btn-sm animated-btn">
+                                                        <a style=" background: #b92b27; /* fallback for old browsers */
+                                                        background: -webkit-linear-gradient(to right, #b92b27, #1565c0); /* Chrome 10-25, Safari 5.1-6 */
+                                                        background: linear-gradient(to right, #b92b27, #1565c0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */" href="profile.html" class="btn btn-primary waves-effect waves-light btn-sm animated-btn">
                                                             View Profile <i class="mdi mdi-arrow-right ms-1"></i>
                                                         </a>
                                                     </div>
@@ -686,11 +774,11 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <div class="card mini-stats-wid">
+                                        <div class="card mini-stats-wid"  onclick="openModal()">
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
-                                                        <p class="text-muted fw-medium">Notifications/ Announcements</p>
+                                                        <p class="text-muted fw-medium" style="font-size: 12px;">Notifications/ Announcements</p>
                                                         <h4 class="mb-0">$35, 723</h4>
                                                     </div>
 
@@ -706,9 +794,26 @@
                                         </div>
                                     </div>
 
+                                    <div id="notificationModal" class="modal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3>Notifications & Announcements</h3>
+                                                <span class="close" onclick="closeModal()">&times;</span>
+                                            </div>
+                                            <div class="notification-list">
+                                                <div class="notification-item">Notifications/Announcements Upcoming Tenders</div>
+                                                <div class="notification-item">Upcoming Tenders</div>
+                                                <div class="notification-item">Russia</div>
+                                                <div class="notification-item">India</div>
+                                                <div class="notification-item">Call to Action for Partnerships Resources & Support</div>
+                                                <div class="notification-item">Latest Market Insights</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-4">
                                         <div class="card mini-stats-wid">
-                                            <div class="card-body">
+                                            <div class="card-body" style="height: 115px;">
                                                 <div class="d-flex">
                                                     <div class="flex-grow-1">
                                                         <p class="text-muted fw-medium">Overview Section</p>
@@ -1143,6 +1248,25 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
+
+        <script>
+            function openModal() {
+            document.getElementById('notificationModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('notificationModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('notificationModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        </script>
+        
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
